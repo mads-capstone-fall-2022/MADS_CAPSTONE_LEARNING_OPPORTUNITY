@@ -2,8 +2,9 @@
 import altair as alt
 import pandas as pd
 import streamlit as st
-import streamlit-aggrid as st_aggrid
-from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
+from gsheetsdb import connect
+#import streamlit-aggrid as st_aggrid
+#from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
 
 st.set_page_config(layout="wide")
 st.title("Interact with Gapminder Data")
@@ -20,7 +21,7 @@ title = "GDP for countries in Oceania"
 #chart = alt.Chart(test).mark_geoshape()
 #st.altair_chart(chart)
 
-from gsheetsdb import connect
+
 
 # Create a connection object.
 conn = connect()
@@ -38,6 +39,6 @@ rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
 # Print results.
 
-AgGrid(rows)
+st.table(rows)
 #for row in rows:
 #    st.write(f"{row.name} ")
