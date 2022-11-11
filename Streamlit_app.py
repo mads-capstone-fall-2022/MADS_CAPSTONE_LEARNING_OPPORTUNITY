@@ -3,24 +3,11 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 from gsheetsdb import connect
-#import streamlit-aggrid as st_aggrid
-#from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
 
 st.set_page_config(layout="wide")
-st.title("Interact with Gapminder Data")
-
-#df = pd.read_csv("G:/My Drive/MADS course transcripts/699 Capstone/coi_district_grouped.csv")
-#df_gdp_o = df.query("continent=='Oceania' & metric=='gdpPercap'")
+st.title("Dashboard for Child oppurtunity index!")
 
 title = "GDP for countries in Oceania"
-#fig = px.line(df, x = "year", y = "NAME_LEA15", color = "year", title = title)
-#st.plotly_chart(fig, use_container_width=True)
-
-
-#test = gpd.read_file('schooldistrict_sy1314_tl15.shp')
-#chart = alt.Chart(test).mark_geoshape()
-#st.altair_chart(chart)
-
 
 
 # Create a connection object.
@@ -37,8 +24,5 @@ def run_query(query):
 sheet_url = st.secrets["public_gsheets_url"]
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
-# Print results.
 
 st.table(rows)
-#for row in rows:
-#    st.write(f"{row.name} ")
