@@ -1,10 +1,8 @@
-import streamlit as st
-import pandas as pd
 #import geopandas as gpd
 import altair as alt
-
-
-
+import pandas as pd
+import streamlit as st
+from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
 
 st.set_page_config(layout="wide")
 st.title("Interact with Gapminder Data")
@@ -38,5 +36,7 @@ sheet_url = st.secrets["public_gsheets_url"]
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
 # Print results.
-for row in rows:
-    st.write(f"{row.name} has a :{row.pet}:")
+
+AgGrid(rows)
+#for row in rows:
+#    st.write(f"{row.name} ")
