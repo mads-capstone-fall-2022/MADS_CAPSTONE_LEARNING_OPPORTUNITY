@@ -2,6 +2,7 @@
 import altair as alt
 import pandas as pd
 import streamlit as st
+import streamlit-aggrid as st_aggrid
 from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
 
 st.set_page_config(layout="wide")

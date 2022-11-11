@@ -1,2 +1,2 @@
 gsheetsdb==0.1.13.1
-streamlit-aggrid
+streamlit-aggrid==0.3.3
