@@ -24,5 +24,5 @@ def run_query(query):
 sheet_url = st.secrets["seda_map_file"]
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
 #print(type(rows))
-#st.map(data=rows, zoom=None, use_container_width=True)
-st.table(rows)
+st.map(data=rows, zoom=None, use_container_width=True)
+#st.table(rows)
