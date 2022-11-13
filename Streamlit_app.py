@@ -29,3 +29,4 @@ st.table(rows)
 
 # KA
 #new
+x = 2
