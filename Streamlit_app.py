@@ -21,7 +21,7 @@ def run_query(query):
     rows = rows.fetchall()
     return rows
 
-sheet_url = st.secrets["troy_test_gsheets_url"]
+sheet_url = st.secrets["seda_map_file"]
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
 #print(type(rows))
 #st.map(data=rows, zoom=None, use_container_width=True)
