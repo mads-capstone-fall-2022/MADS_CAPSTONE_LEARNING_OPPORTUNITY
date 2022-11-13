@@ -23,6 +23,8 @@ def run_query(query):
 
 sheet_url = st.secrets["seda_map_file"]
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
-print(type(rows))
-#st.map(data=rows, zoom=None, use_container_width=True)
+#print(type(rows))
+seda_map_df  = pd.DataFrame(list(rows))
+
+st.map(data=seda_map_df, zoom=None, use_container_width=True)
 #st.table(rows)
