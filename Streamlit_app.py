@@ -26,3 +26,6 @@ rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
 
 st.table(rows)
+
+# KA
+#new
