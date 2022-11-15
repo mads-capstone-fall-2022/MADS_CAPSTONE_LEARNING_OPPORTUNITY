@@ -3,6 +3,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 from gsheetsdb import connect
+import plotly.express as px
 
 st.set_page_config(layout="wide")
 st.title("Dashboard for Child oppurtunity index!")
@@ -26,5 +27,11 @@ rows = run_query(f'SELECT * FROM "{sheet_url}"')
 #print(type(rows))
 seda_map_df  = pd.DataFrame(list(rows))
 
-st.map(data=seda_map_df, zoom=None, use_container_width=True)
+
+fig = px.scatter_mapbox(seda_map_df, lat="latitude", lon="longitude", hover_name="NAME", hover_data=["GEOID"],
+                        color_discrete_sequence=["fuchsia"], zoom=3, height=300)
+fig.update_layout(mapbox_style="open-street-map")
+fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+fig.show()
+#st.map(data=seda_map_df, zoom=None, use_container_width=True)
 #st.table(rows)
