@@ -32,6 +32,7 @@ fig = px.scatter_mapbox(seda_map_df, lat="latitude", lon="longitude", hover_name
                         color_discrete_sequence=["fuchsia"], zoom=3, height=300)
 fig.update_layout(mapbox_style="open-street-map")
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-fig.show()
+st.plotly_chart(fig, use_container_width=True)
+#fig.show()
 #st.map(data=seda_map_df, zoom=None, use_container_width=True)
 #st.table(rows)
