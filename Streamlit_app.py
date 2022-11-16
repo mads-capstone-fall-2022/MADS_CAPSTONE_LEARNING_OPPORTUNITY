@@ -31,7 +31,7 @@ seda_map_df  = pd.DataFrame(list(rows))
 fig = make_subplots(rows=1, cols=2)
 
 fig = px.scatter_mapbox(seda_map_df, lat="latitude", lon="longitude", hover_name="NAME", hover_data=["GEOID"],
-                        color_discrete_sequence=["fuchsia"], zoom=3, height=300,scope='usa',
+                        color_discrete_sequence=["fuchsia"], zoom=3, height=300,
                         row=1, col=1)
 fig.update_layout(mapbox_style="open-street-map")
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
