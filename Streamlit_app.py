@@ -47,7 +47,7 @@ v_year_choice = st.sidebar.slider(
 #filter the dataframe
 child_oppurtunity_df = child_oppurtunity_df[child_oppurtunity_df['year'] == v_year_choice]
 child_oppurtunity_df = child_oppurtunity_df[child_oppurtunity_df['Segment']==int(v_segment[-1])-1]
- child_oppurtunity_df = child_oppurtunity_df[child_oppurtunity_df['subject']==v_subject]   
+child_oppurtunity_df = child_oppurtunity_df[child_oppurtunity_df['subject']==v_subject]   
 #st.set_page_config(layout="wide")
 #fig = make_subplots(rows=1, cols=2)
 
