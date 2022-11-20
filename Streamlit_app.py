@@ -32,7 +32,16 @@ rows = run_query(f'SELECT * FROM "{sheet_url}"')
 child_oppurtunity_df = pd.DataFrame(list(rows))
 
 #add filters
+v_segment = st.selectbox(
+     'Which segment would you like to select',
+     ('Segment 1', 'Segment 2', 'Segment 3','Segment 4'))
+v_year_choice = st.sidebar.slider(
+    'Year:', min_value=2010, max_value=2015, step=1, value=2015)
 
+
+#filter the dataframe
+child_oppurtunity_df = child_oppurtunity_df[child_oppurtunity_df['year'] == v_year_choice]
+child_oppurtunity_df = child_oppurtunity_df[child_oppurtunity_df['Segment']==int(v_segment[-1])]
     
 #st.set_page_config(layout="wide")
 #fig = make_subplots(rows=1, cols=2)
