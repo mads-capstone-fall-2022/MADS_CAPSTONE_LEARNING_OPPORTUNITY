@@ -44,7 +44,7 @@ child_oppurtunity_df = child_oppurtunity_df[child_oppurtunity_df['year'].isin(v_
 child_oppurtunity_df = child_oppurtunity_df[child_oppurtunity_df['segment'].isin(v_segment)]
     
 st.set_page_config(layout="wide")
-fig = make_subplots(rows=1, cols=2)
+#fig = make_subplots(rows=1, cols=2)
 
 #fig = px.scatter_mapbox(seda_map_df, lat="latitude", lon="longitude", hover_name="NAME", hover_data=["GEOID"],
                     #    color_discrete_sequence=["fuchsia"], zoom=3, height=300)
