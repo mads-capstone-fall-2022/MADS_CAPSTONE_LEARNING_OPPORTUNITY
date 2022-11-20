@@ -40,7 +40,7 @@ v_year_choice = st.sidebar.slider(
 
 
 #filter the dataframe
-child_oppurtunity_df = child_oppurtunity_df[child_oppurtunity_df['year'].isin(v_year_choice)]
+child_oppurtunity_df = child_oppurtunity_df[child_oppurtunity_df['year']. == v_year_choice]
 child_oppurtunity_df = child_oppurtunity_df[child_oppurtunity_df['segment'].isin(v_segment)]
     
 st.set_page_config(layout="wide")
