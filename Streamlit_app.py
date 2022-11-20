@@ -41,14 +41,14 @@ v_year_choice = st.sidebar.slider(
 
 #filter the dataframe
 child_oppurtunity_df = child_oppurtunity_df[child_oppurtunity_df['year'] == v_year_choice]
-child_oppurtunity_df = child_oppurtunity_df[child_oppurtunity_df['Segment']==int(v_segment[-1])]
+#child_oppurtunity_df = child_oppurtunity_df[child_oppurtunity_df['Segment']==int(v_segment[-1])]
     
 #st.set_page_config(layout="wide")
 #fig = make_subplots(rows=1, cols=2)
 
 #fig = px.scatter_mapbox(seda_map_df, lat="latitude", lon="longitude", hover_name="NAME", hover_data=["GEOID"],
                     #    color_discrete_sequence=["fuchsia"], zoom=3, height=300)
-fig = px.scatter_mapbox(child_oppurtunity_df,lat='latitude', lon='longitude', size='cs_mn_all_abs' ,text='sedaleaname')#, hover_name='subject')
+fig = px.scatter_mapbox(child_oppurtunity_df,lat='latitude', lon='longitude', size='cs_mn_all_abs')#, hover_name='subject')
 fig.update_layout(mapbox_style="open-street-map")
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.update_geos(fitbounds="locations")
