@@ -7,9 +7,9 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 
 st.set_page_config(layout="wide")
-st.title("Dashboard for Child oppurtunity index!")
+st.title("Compare Achievment scores on the same Scale!")
 
-title = "GDP for countries in Oceania"
+
 
 
 # Create a connection object.
@@ -62,3 +62,42 @@ st.plotly_chart(fig, use_container_width=True)
 #fig.show()
 #st.map(data=seda_map_df, zoom=None, use_container_width=True)
 #st.table(rows)
+
+st.markdown('Team Learning Opportunity Blog Post
+Jay Korrapati and Katie Andrews
+Introduction
+When school districts in the US are judged, it is usually by comparison to other districts.  Parents use ratings sites like GreatSchools - which uses test scores, graduation rates, and other data (GreatSchools.org, n.d.) - to compare schools when they are looking to move to a new area.  State governments use standardized test scores to rank schools and districts and identify struggling schools (Klein, 2015).  The standardized test scores used in both cases were designed at the state level in response to the 2001 No Child Left Behind federal law, which mandated that states establish tests for reading and math with at least 3 levels of scores: basic, proficient, and advanced (Colorado Department of Education, n.d.).  While much of NCLB has been amended since then, these tests are still used.  
+
+But are such direct comparisons between school districts fair, or even enlightening?  Since US schools are primarily funded at the local level, not state or federal, there is a wide variety in school financial expenditure (Semuels, 2016).  Also, communities may have different levels of non-financial resources supporting education.  The test scores themselves are not directly comparable, since each state has a different set of tests.
+
+To address these concerns, we performed an analysis using two sets of data: the Child Opportunity Index (Diversitydatakids.org, 2022) and the Stanford Educational Data Archive (Reardon et al., 2021).  The Child Opportunity Index (COI) is a holistic view of the resources available to children in a community, including indicators such as access to healthy food, 3rd grade reading and math scores, percentage of the population with health insurance, school financial expenditure, and average educational attainment by adults in the area.  The Stanford Educational Data Archive (SEDA) baselines state standardized test scores in reading and math against a common national test (the National Assessment of Educational Progress (NAEP)) in order to allow between-state comparisons.  In our analysis, we used the COI data to cluster school districts across the US and to predict SEDA scores.  This provided us with a view to which school districts are doing better than others from similar backgrounds.  
+
+<dashboard?>
+Methods
+Data Cleaning
+We imputed missing values in COI and computed weighted averages of multiple census tracts before consolidating them by school district
+
+Clustering
+We tried K-Means and DBSCAN clustering methods and found a better signal with K-Means.  Our goal was to use the cluster indicators as features in achievement score prediction
+
+Prediction
+
+Results
+
+Discussion
+Learning from other states’ educational successes (ref EPI report)
+
+Citations
+Carnoy, M., García, E., & Khavenson, T. (2015, October 30). Bringing it back home:  Why state comparisons are more useful than international comparisons for improving U.S. education policy. Economic Policy Institute. https://www.epi.org/publication/bringing-it-back-home-why-state-comparisons-are-more-useful-than-international-comparisons-for-improving-u-s-education-policy/ 
+Colorado Department of Education. (n.d.). Every Student Succeeds Act side-by-side. Retrieved October 27, 2022 from https://www.cde.state.co.us/fedprograms/nclbwaiveressasummary
+Diversitydatakids.org. (2022). Child Opportunity Index (Version 2.0). [Data set]. https://data.diversitydatakids.org/dataset/coi20-child-opportunity-index-2-0-database?_external=True
+Fahle, E. M., Chavez, B., Kalogrides, D., Shear, B. R., Reardon, S. F., & Ho, A. D. (2021). Stanford Education Data Archive: Technical Documentation (Version 4.1). http://purl.stanford.edu/db586ns4974
+GreatSchools.org. (n.d.) GreatSchools ratings methodology report.  Retrieved November 6, 2022 from https://www.greatschools.org/gk/ratings-methodology
+Klein, A. (2015, April 10). No Child Left Behind: An overview. Education Week. https://www.edweek.org/policy-politics/no-child-left-behind-an-overview/2015/04
+National Center for Education Statistics. (2015). School district geographic relationship files. [Data set]. https://nces.ed.gov/programs/edge/Geographic/RelationshipFiles
+Noelke, C., McArdle, N., Baek, M., Huntington, N., Huber, R., Hardy, E., & Acevedo-Garcia, D. (2020). Child Opportunity Index 2.0 Technical Documentation. http://diversitydatakids.org/research-library/research-brief/how-we-built-it
+Reardon, S. F., Ho, A. D., Shear, B. R., Fahle, E. M., Kalogrides, D., Jang, H., & Chavez, B. (2021). Stanford Education Data Archive (Version 4.1). [Data set]. Stanford University. http://purl.stanford.edu/db586ns4974
+Semuels, A. (2016, August 25). Good school, rich school; bad school, poor school: The inequality at the heart of America’s education system. The Atlantic. https://www.theatlantic.com/business/archive/2016/08/property-taxes-and-unequal-schools/497333/
+United States Census Bureau. (2010). 2010: DEC redistricting data (PL 94-171). [Data set]. https://data.census.gov/cedsci/table?q=Decennial%20Census%20population&g=0100000US%241400000&d=DEC%20Redistricting%20Data%20%28PL%2094-171%29&tid=DECENNIALPL2020.P1
+
+')
