@@ -7,7 +7,8 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 
 st.set_page_config(layout="wide")
-st.title("Compare Achievment scores on the same Scale!")
+Report, Dashboard = st.tabs(["Report Page", "Dashboard Page"])
+Dashboard.title("Compare Achievment scores on the same Scale!")
 
 
 
@@ -17,13 +18,13 @@ conn = connect()
 
 # Perform SQL query on the Google Sheet.
 # Uses st.cache to only rerun when the query changes or after 10 min.
-@st.cache(ttl=600)
+@Dashboard.cache(ttl=600)
 def run_query(query):
     rows = conn.execute(query, headers=1)
     rows = rows.fetchall()
     return rows
 
-sheet_url = st.secrets["child_oppurtunity_input_file"] #st.secrets["seda_map_file"]
+sheet_url = Dashboard.secrets["child_oppurtunity_input_file"] #st.secrets["seda_map_file"]
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
 
@@ -32,15 +33,15 @@ rows = run_query(f'SELECT * FROM "{sheet_url}"')
 child_oppurtunity_df = pd.DataFrame(list(rows))
 
 #add filters
-v_segment = st.sidebar.selectbox(
+v_segment = Dashboard.sidebar.selectbox(
      'Which segment would you like to select',
      ('Segment 1', 'Segment 2', 'Segment 3','Segment 4'))
 
-v_subject = st.sidebar.selectbox(
+v_subject = Dashboard.sidebar.selectbox(
      'Which subject would you like to select',
      ('Math', 'Reading'))
 
-v_year_choice = st.sidebar.slider(
+v_year_choice = Dashboard.sidebar.slider(
     'Year:', min_value=2010, max_value=2015, step=1, value=2015)
 
 
@@ -58,38 +59,38 @@ fig.update_layout(mapbox_style="open-street-map")
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.update_geos(fitbounds="locations")
 fig.update_layout(mapbox_bounds={"west": -180, "east": -50, "south": 20, "north": 90})
-st.plotly_chart(fig, use_container_width=True)
+Dashboard.plotly_chart(fig, use_container_width=True)
 #fig.show()
 #st.map(data=seda_map_df, zoom=None, use_container_width=True)
 #st.table(rows)
 
-st.header('Team Learning Opportunity Blog Post')
-st.text('Jay Korrapati and Katie Andrews')
-st.subheader('Introduction')
+Report.header('Team Learning Opportunity Blog Post')
+Report.text('Jay Korrapati and Katie Andrews')
+Report.subheader('Introduction')
 
-st.markdown(f'''When school districts in the US are judged, it is usually by comparison to other districts.  Parents use ratings sites like GreatSchools - which uses test scores, graduation rates, and other data (GreatSchools.org, n.d.) - to compare schools when they are looking to move to a new area.  State governments use standardized test scores to rank schools and districts and identify struggling schools (Klein, 2015).  The standardized test scores used in both cases were designed at the state level in response to the 2001 No Child Left Behind federal law, which mandated that states establish tests for reading and math with at least 3 levels of scores: basic, proficient, and advanced (Colorado Department of Education, n.d.).  While much of NCLB has been amended since then, these tests are still used.  
+Report.markdown(f'''When school districts in the US are judged, it is usually by comparison to other districts.  Parents use ratings sites like GreatSchools - which uses test scores, graduation rates, and other data (GreatSchools.org, n.d.) - to compare schools when they are looking to move to a new area.  State governments use standardized test scores to rank schools and districts and identify struggling schools (Klein, 2015).  The standardized test scores used in both cases were designed at the state level in response to the 2001 No Child Left Behind federal law, which mandated that states establish tests for reading and math with at least 3 levels of scores: basic, proficient, and advanced (Colorado Department of Education, n.d.).  While much of NCLB has been amended since then, these tests are still used.  
 
 But are such direct comparisons between school districts fair, or even enlightening?  Since US schools are primarily funded at the local level, not state or federal, there is a wide variety in school financial expenditure (Semuels, 2016).  Also, communities may have different levels of non-financial resources supporting education.  The test scores themselves are not directly comparable, since each state has a different set of tests.
 
 To address these concerns, we performed an analysis using two sets of data: the Child Opportunity Index (Diversitydatakids.org, 2022) and the Stanford Educational Data Archive (Reardon et al., 2021).  The Child Opportunity Index (COI) is a holistic view of the resources available to children in a community, including indicators such as access to healthy food, 3rd grade reading and math scores, percentage of the population with health insurance, school financial expenditure, and average educational attainment by adults in the area.  The Stanford Educational Data Archive (SEDA) baselines state standardized test scores in reading and math against a common national test (the National Assessment of Educational Progress (NAEP)) in order to allow between-state comparisons.  In our analysis, we used the COI data to cluster school districts across the US and to predict SEDA scores.  This provided us with a view to which school districts are doing better than others from similar backgrounds.  
 ''')
-st.subheader('dashboard')
-st.subheader('Methods')
-st.subheader('Data Cleaning')
-st.markdown(f'''We imputed missing values in COI and computed weighted averages of multiple census tracts before consolidating them by school district
+#Report.subheader('dashboard')
+Report.subheader('Methods')
+Report.subheader('Data Cleaning')
+Report.markdown(f'''We imputed missing values in COI and computed weighted averages of multiple census tracts before consolidating them by school district
 ''')
-st.subheader('Clustering')
-st.markdown(f'''We tried K-Means and DBSCAN clustering methods and found a better signal with K-Means.  Our goal was to use the cluster indicators as features in achievement score prediction
+Report.subheader('Clustering')
+Report.markdown(f'''We tried K-Means and DBSCAN clustering methods and found a better signal with K-Means.  Our goal was to use the cluster indicators as features in achievement score prediction
 ''')
-st.subheader('Prediction')
+Report.subheader('Prediction')
 
-st.subheader('Results')
+Report.subheader('Results')
 
-st.subheader('Discussion')
-st.markdown(f'''Learning from other states’ educational successes (ref EPI report)''')
+Report.subheader('Discussion')
+Report.markdown(f'''Learning from other states’ educational successes (ref EPI report)''')
 
-st.subheader('Citations')
-st.markdown(f'''Carnoy, M., García, E., & Khavenson, T. (2015, October 30). Bringing it back home:  Why state comparisons are more useful than international comparisons for improving U.S. education policy. Economic Policy Institute. https://www.epi.org/publication/bringing-it-back-home-why-state-comparisons-are-more-useful-than-international-comparisons-for-improving-u-s-education-policy/ 
+Report.subheader('Citations')
+Report.markdown(f'''Carnoy, M., García, E., & Khavenson, T. (2015, October 30). Bringing it back home:  Why state comparisons are more useful than international comparisons for improving U.S. education policy. Economic Policy Institute. https://www.epi.org/publication/bringing-it-back-home-why-state-comparisons-are-more-useful-than-international-comparisons-for-improving-u-s-education-policy/ 
 Colorado Department of Education. (n.d.). Every Student Succeeds Act side-by-side. Retrieved October 27, 2022 from https://www.cde.state.co.us/fedprograms/nclbwaiveressasummary
 Diversitydatakids.org. (2022). Child Opportunity Index (Version 2.0). [Data set]. https://data.diversitydatakids.org/dataset/coi20-child-opportunity-index-2-0-database?_external=True
 Fahle, E. M., Chavez, B., Kalogrides, D., Shear, B. R., Reardon, S. F., & Ho, A. D. (2021). Stanford Education Data Archive: Technical Documentation (Version 4.1). http://purl.stanford.edu/db586ns4974
