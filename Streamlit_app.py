@@ -42,7 +42,7 @@ v_subject = Dashboard.selectbox(
      'Which subject would you like to select',
      ('Math', 'Reading'))
 
-v_year_choice = Dashboard.sidebar.slider(
+v_year_choice = Dashboard.slider(
     'Year:', min_value=2010, max_value=2015, step=1, value=2015)
 
 
