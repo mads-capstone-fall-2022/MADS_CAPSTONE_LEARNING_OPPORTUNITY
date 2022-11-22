@@ -63,7 +63,7 @@ st.plotly_chart(fig, use_container_width=True)
 #st.map(data=seda_map_df, zoom=None, use_container_width=True)
 #st.table(rows)
 
-st.markdown('Team Learning Opportunity Blog Post
+st.markdown(f'''Team Learning Opportunity Blog Post
 Jay Korrapati and Katie Andrews
 Introduction
 When school districts in the US are judged, it is usually by comparison to other districts.  Parents use ratings sites like GreatSchools - which uses test scores, graduation rates, and other data (GreatSchools.org, n.d.) - to compare schools when they are looking to move to a new area.  State governments use standardized test scores to rank schools and districts and identify struggling schools (Klein, 2015).  The standardized test scores used in both cases were designed at the state level in response to the 2001 No Child Left Behind federal law, which mandated that states establish tests for reading and math with at least 3 levels of scores: basic, proficient, and advanced (Colorado Department of Education, n.d.).  While much of NCLB has been amended since then, these tests are still used.  
@@ -100,4 +100,4 @@ Reardon, S. F., Ho, A. D., Shear, B. R., Fahle, E. M., Kalogrides, D., Jang, H.,
 Semuels, A. (2016, August 25). Good school, rich school; bad school, poor school: The inequality at the heart of America’s education system. The Atlantic. https://www.theatlantic.com/business/archive/2016/08/property-taxes-and-unequal-schools/497333/
 United States Census Bureau. (2010). 2010: DEC redistricting data (PL 94-171). [Data set]. https://data.census.gov/cedsci/table?q=Decennial%20Census%20population&g=0100000US%241400000&d=DEC%20Redistricting%20Data%20%28PL%2094-171%29&tid=DECENNIALPL2020.P1
 
-')
+''')
