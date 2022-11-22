@@ -32,12 +32,13 @@ rows = run_query(f'SELECT * FROM "{sheet_url}"')
 #seda_map_df  = pd.DataFrame(list(rows))
 child_oppurtunity_df = pd.DataFrame(list(rows))
 
+
 #add filters
-v_segment = Dashboard.sidebar.selectbox(
+v_segment = Dashboard.selectbox(
      'Which segment would you like to select',
      ('Segment 1', 'Segment 2', 'Segment 3','Segment 4'))
 
-v_subject = Dashboard.sidebar.selectbox(
+v_subject = Dashboard.selectbox(
      'Which subject would you like to select',
      ('Math', 'Reading'))
 
