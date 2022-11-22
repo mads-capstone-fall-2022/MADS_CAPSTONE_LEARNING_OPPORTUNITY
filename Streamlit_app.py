@@ -18,13 +18,13 @@ conn = connect()
 
 # Perform SQL query on the Google Sheet.
 # Uses st.cache to only rerun when the query changes or after 10 min.
-@Dashboard.cache(ttl=600)
+@st.cache(ttl=600)
 def run_query(query):
     rows = conn.execute(query, headers=1)
     rows = rows.fetchall()
     return rows
 
-sheet_url = Dashboard.secrets["child_oppurtunity_input_file"] #st.secrets["seda_map_file"]
+sheet_url = st.secrets["child_oppurtunity_input_file"] #st.secrets["seda_map_file"]
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
 
