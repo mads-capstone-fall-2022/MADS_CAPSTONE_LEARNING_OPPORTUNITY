@@ -103,3 +103,9 @@ Report.markdown('''<p style="padding-left: 2em; text-indent: -2em;">Carnoy, M., 
 <p style="padding-left: 2em; text-indent: -2em;">Semuels, A. (2016, August 25). Good school, rich school; bad school, poor school: The inequality at the heart of America's education system. The Atlantic. https://www.theatlantic.com/business/archive/2016/08/property-taxes-and-unequal-schools/497333/</p>
 <p style="padding-left: 2em; text-indent: -2em;">United States Census Bureau. (2010). 2010: DEC redistricting data (PL 94-171). [Data set]. https://data.census.gov/cedsci/table?q=Decennial%20Census%20population&g=0100000US%241400000&d=DEC%20Redistricting%20Data%20%28PL%2094-171%29&tid=DECENNIALPL2020.P1</p>
 ''', unsafe_allow_html=True)
+
+
+
+test_csv = pd.read_csv('Data/feature_imp.csv', index_col=0)
+
+Test_Page.write(test_csv)
