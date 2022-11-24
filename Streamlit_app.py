@@ -106,6 +106,8 @@ Report.markdown('''<p style="padding-left: 2em; text-indent: -2em;">Carnoy, M., 
 
 
 
-test_csv = pd.read_csv('Data/feature_imp.csv', index_col=0)
+feature_imp_df = pd.read_csv('Data/feature_imp.csv', index_col=0)
 
-Test_Page.write(test_csv)
+fig_bp_feat_imp = px.box(feature_imp_df, x='Variable', y='Importance', color='Cluster Name', height=600, width=1200)
+
+Test_Page.plotly_chart(fig_bp_feat_imp)
