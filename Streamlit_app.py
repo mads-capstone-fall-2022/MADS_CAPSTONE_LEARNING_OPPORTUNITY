@@ -88,19 +88,18 @@ Report.subheader('Prediction')
 Report.subheader('Results')
 
 Report.subheader('Discussion')
-Report.markdown(f'''Learning from other states’ educational successes (ref EPI report)''')
+Report.markdown(f'''Learning from other states' educational successes (ref EPI report)''')
 
 Report.subheader('Citations')
-Report.markdown(f'''Carnoy, M., García, E., & Khavenson, T. (2015, October 30). Bringing it back home:  Why state comparisons are more useful than international comparisons for improving U.S. education policy. Economic Policy Institute. https://www.epi.org/publication/bringing-it-back-home-why-state-comparisons-are-more-useful-than-international-comparisons-for-improving-u-s-education-policy/ 
-Colorado Department of Education. (n.d.). Every Student Succeeds Act side-by-side. Retrieved October 27, 2022 from https://www.cde.state.co.us/fedprograms/nclbwaiveressasummary
-Diversitydatakids.org. (2022). Child Opportunity Index (Version 2.0). [Data set]. https://data.diversitydatakids.org/dataset/coi20-child-opportunity-index-2-0-database?_external=True
-Fahle, E. M., Chavez, B., Kalogrides, D., Shear, B. R., Reardon, S. F., & Ho, A. D. (2021). Stanford Education Data Archive: Technical Documentation (Version 4.1). http://purl.stanford.edu/db586ns4974
-GreatSchools.org. (n.d.) GreatSchools ratings methodology report.  Retrieved November 6, 2022 from https://www.greatschools.org/gk/ratings-methodology
-Klein, A. (2015, April 10). No Child Left Behind: An overview. Education Week. https://www.edweek.org/policy-politics/no-child-left-behind-an-overview/2015/04
-National Center for Education Statistics. (2015). School district geographic relationship files. [Data set]. https://nces.ed.gov/programs/edge/Geographic/RelationshipFiles
-Noelke, C., McArdle, N., Baek, M., Huntington, N., Huber, R., Hardy, E., & Acevedo-Garcia, D. (2020). Child Opportunity Index 2.0 Technical Documentation. http://diversitydatakids.org/research-library/research-brief/how-we-built-it
-Reardon, S. F., Ho, A. D., Shear, B. R., Fahle, E. M., Kalogrides, D., Jang, H., & Chavez, B. (2021). Stanford Education Data Archive (Version 4.1). [Data set]. Stanford University. http://purl.stanford.edu/db586ns4974
-Semuels, A. (2016, August 25). Good school, rich school; bad school, poor school: The inequality at the heart of America’s education system. The Atlantic. https://www.theatlantic.com/business/archive/2016/08/property-taxes-and-unequal-schools/497333/
-United States Census Bureau. (2010). 2010: DEC redistricting data (PL 94-171). [Data set]. https://data.census.gov/cedsci/table?q=Decennial%20Census%20population&g=0100000US%241400000&d=DEC%20Redistricting%20Data%20%28PL%2094-171%29&tid=DECENNIALPL2020.P1
-
+Report.markdown(f'''<p style="padding-left: 2em; text-indent: -2em;">Carnoy, M., García, E., & Khavenson, T. (2015, October 30). Bringing it back home:  Why state comparisons are more useful than international comparisons for improving U.S. education policy. Economic Policy Institute. https://www.epi.org/publication/bringing-it-back-home-why-state-comparisons-are-more-useful-than-international-comparisons-for-improving-u-s-education-policy/ </p>
+<p style="padding-left: 2em; text-indent: -2em;">Colorado Department of Education. (n.d.). Every Student Succeeds Act side-by-side. Retrieved October 27, 2022 from https://www.cde.state.co.us/fedprograms/nclbwaiveressasummary</p>
+<p style="padding-left: 2em; text-indent: -2em;">Diversitydatakids.org. (2022). Child Opportunity Index (Version 2.0). [Data set]. https://data.diversitydatakids.org/dataset/coi20-child-opportunity-index-2-0-database?_external=True</p>
+<p style="padding-left: 2em; text-indent: -2em;">Fahle, E. M., Chavez, B., Kalogrides, D., Shear, B. R., Reardon, S. F., & Ho, A. D. (2021). Stanford Education Data Archive: Technical Documentation (Version 4.1). http://purl.stanford.edu/db586ns4974</p>
+<p style="padding-left: 2em; text-indent: -2em;">GreatSchools.org. (n.d.) GreatSchools ratings methodology report.  Retrieved November 6, 2022 from https://www.greatschools.org/gk/ratings-methodology</p>
+<p style="padding-left: 2em; text-indent: -2em;">Klein, A. (2015, April 10). No Child Left Behind: An overview. Education Week. https://www.edweek.org/policy-politics/no-child-left-behind-an-overview/2015/04</p>
+<p style="padding-left: 2em; text-indent: -2em;">National Center for Education Statistics. (2015). School district geographic relationship files. [Data set]. https://nces.ed.gov/programs/edge/Geographic/RelationshipFiles</p>
+<p style="padding-left: 2em; text-indent: -2em;">Noelke, C., McArdle, N., Baek, M., Huntington, N., Huber, R., Hardy, E., & Acevedo-Garcia, D. (2020). Child Opportunity Index 2.0 Technical Documentation. http://diversitydatakids.org/research-library/research-brief/how-we-built-it</p>
+<p style="padding-left: 2em; text-indent: -2em;">Reardon, S. F., Ho, A. D., Shear, B. R., Fahle, E. M., Kalogrides, D., Jang, H., & Chavez, B. (2021). Stanford Education Data Archive (Version 4.1). [Data set]. Stanford University. http://purl.stanford.edu/db586ns4974</p>
+<p style="padding-left: 2em; text-indent: -2em;">Semuels, A. (2016, August 25). Good school, rich school; bad school, poor school: The inequality at the heart of America’s education system. The Atlantic. https://www.theatlantic.com/business/archive/2016/08/property-taxes-and-unequal-schools/497333/</p>
+<p style="padding-left: 2em; text-indent: -2em;">United States Census Bureau. (2010). 2010: DEC redistricting data (PL 94-171). [Data set]. https://data.census.gov/cedsci/table?q=Decennial%20Census%20population&g=0100000US%241400000&d=DEC%20Redistricting%20Data%20%28PL%2094-171%29&tid=DECENNIALPL2020.P1</p>
 ''')
