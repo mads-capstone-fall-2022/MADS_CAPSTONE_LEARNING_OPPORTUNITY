@@ -63,7 +63,7 @@ v_year_choice = Dashboard.slider(
 
 #filter the dataframe
 child_oppurtunity_df = child_opportunity_df[child_opportunity_df['seda_year'] == v_year_choice]
-child_oppurtunity_df = child_opportunity_df[child_opportunity_df['Segment']==int(v_segment[-1])-1]
+child_oppurtunity_df = child_opportunity_df[child_opportunity_df['cluster']==int(v_segment[-1])-1]
 child_oppurtunity_df = child_opportunity_df[child_opportunity_df['subject']==v_subject]   
 #st.set_page_config(layout="wide")
 #fig = make_subplots(rows=1, cols=2)
