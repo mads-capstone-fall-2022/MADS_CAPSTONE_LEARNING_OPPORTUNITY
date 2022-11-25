@@ -14,8 +14,8 @@ Dashboard.title("Compare Achievment scores on the same Scale!")
 
 
 
-# # Create a connection object.
-# conn = connect()
+# Create a connection object.
+conn = connect()
 
 # # Perform SQL query on the Google Sheet.
 # # Uses st.cache to only rerun when the query changes or after 10 min.
@@ -35,16 +35,16 @@ Dashboard.title("Compare Achievment scores on the same Scale!")
 
 
 # KA - try pickle instead of google sheets
-with open('coi_seda_display_1.pkl', 'rb') as f:
+with open('Data/coi_seda_display_1.pkl', 'rb') as f:
     coi_seda_1_df = pickle.load(f)
 
-with open('coi_seda_display_2.pkl', 'rb') as f:
+with open('Data/coi_seda_display_2.pkl', 'rb') as f:
     coi_seda_2_df = pickle.load(f)
 
 child_opportunity_df = pd.concat([coi_seda_1_df, coi_seda_2_df])
 
 
-with open('feature_imp.pkl', 'rb') as f:
+with open('Data/feature_imp.pkl', 'rb') as f:
     feature_imp_df = pickle.load(f)
 
 
