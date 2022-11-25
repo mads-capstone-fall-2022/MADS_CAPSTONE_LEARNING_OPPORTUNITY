@@ -85,6 +85,20 @@ fig_bp_feat_imp = px.box(feature_imp_df, x='Variable', y='Importance', color='Cl
 Dashboard.plotly_chart(fig_bp_feat_imp)
 
 
+child_opportunity_df['cluster'] = child_opportunity_df['cluster'].astype(str)
+
+fig_sp_clusters = px.scatter(child_opportunity_df, 
+                             x='Component 1', 
+                             y='Component 2', 
+                             color='cluster', 
+                             category_orders={'cluster': ['0', '1', '2', '3']}, 
+                             hover_name='NAME_LEA15',
+                             log_x=True,
+                             log_y=True,
+                             width=800, 
+                             height=600)
+
+
 
 # Data loading for report sections
 model_results_df = pd.read_csv('Data/model_results.csv')
