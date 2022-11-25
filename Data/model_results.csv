@@ -1,0 +1,11 @@
+Model,Hyperparameters,Cluster,Training Set R2 Score,Test Set R2 Score
+Linear Regression,,All,0.5514,0.5279
+Lasso Linear Regression,alpha=0.5,All,0.0025,-0.0047
+Ridge Linear Regression,alpha=1,All,0.5514,0.5279
+Random Forest Regressor,"n_estimators=100, max_depth=7",All,0.6023,0.5117
+Gradient Boosting Regressor,"learning_rate=1, max_depth=2",All,0.6212,0.5125
+Histogram Gradient Boosting Regressor,"learning_rate=0.1, max_depth=4",All,0.6286,0.5442
+Histogram Gradient Boosting Regressor,"learning_rate=0.1, max_depth=4",0,0.3664,0.1666
+Histogram Gradient Boosting Regressor,"learning_rate=0.1, max_depth=4",1,0.7638,0.5989
+Histogram Gradient Boosting Regressor,"learning_rate=0.1, max_depth=4",2,0.9004,
+Histogram Gradient Boosting Regressor,"learning_rate=0.1, max_depth=4",3,0.5170,0.3628
