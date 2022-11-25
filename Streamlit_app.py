@@ -3,6 +3,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 from gsheetsdb import connect
+import pickle
 import plotly.express as px
 from plotly.subplots import make_subplots
 
@@ -13,24 +14,38 @@ Dashboard.title("Compare Achievment scores on the same Scale!")
 
 
 
-# Create a connection object.
-conn = connect()
+# # Create a connection object.
+# conn = connect()
 
-# Perform SQL query on the Google Sheet.
-# Uses st.cache to only rerun when the query changes or after 10 min.
-@st.cache(ttl=600)
-def run_query(query):
-    rows = conn.execute(query, headers=1)
-    rows = rows.fetchall()
-    return rows
+# # Perform SQL query on the Google Sheet.
+# # Uses st.cache to only rerun when the query changes or after 10 min.
+# @st.cache(ttl=600)
+# def run_query(query):
+#     rows = conn.execute(query, headers=1)
+#     rows = rows.fetchall()
+#     return rows
 
-sheet_url = st.secrets["child_oppurtunity_input_file"] #st.secrets["seda_map_file"]
-rows = run_query(f'SELECT * FROM "{sheet_url}"')
+# sheet_url = st.secrets["child_oppurtunity_input_file"] #st.secrets["seda_map_file"]
+# rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
 
-#print(type(rows))
-#seda_map_df  = pd.DataFrame(list(rows))
-child_opportunity_df = pd.DataFrame(list(rows))
+# #print(type(rows))
+# #seda_map_df  = pd.DataFrame(list(rows))
+# child_opportunity_df = pd.DataFrame(list(rows))
+
+
+# KA - try pickle instead of google sheets
+with open('coi_seda_display_1.pkl', 'rb') as f:
+    coi_seda_1_df = pickle.load(f)
+
+with open('coi_seda_display_2.pkl', 'rb') as f:
+    coi_seda_2_df = pickle.load(f)
+
+child_opportunity_df = pd.concat([coi_seda_1_df, coi_seda_2_df])
+
+
+with open('feature_imp.pkl', 'rb') as f:
+    feature_imp_df = pickle.load(f)
 
 
 #add filters
@@ -47,23 +62,28 @@ v_year_choice = Dashboard.slider(
 
 
 #filter the dataframe
-child_oppurtunity_df = child_opportunity_df[child_opportunity_df['year'] == v_year_choice]
+child_oppurtunity_df = child_opportunity_df[child_opportunity_df['seda_year'] == v_year_choice]
 child_oppurtunity_df = child_opportunity_df[child_opportunity_df['Segment']==int(v_segment[-1])-1]
 child_oppurtunity_df = child_opportunity_df[child_opportunity_df['subject']==v_subject]   
 #st.set_page_config(layout="wide")
 #fig = make_subplots(rows=1, cols=2)
 
-#fig = px.scatter_mapbox(seda_map_df, lat="latitude", lon="longitude", hover_name="NAME", hover_data=["GEOID"],
-                    #    color_discrete_sequence=["fuchsia"], zoom=3, height=300)
-fig = px.scatter_mapbox(child_opportunity_df,lat='latitude', lon='longitude', zoom=3, height=300, hover_name='sedaleaname',color_continuous_scale = 'rdylgn', color='subject', size='cs_mn_all_abs' ,text='sedaleaname')#, hover_name='subject')
-fig.update_layout(mapbox_style="open-street-map")
-fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-fig.update_geos(fitbounds="locations")
-fig.update_layout(mapbox_bounds={"west": -180, "east": -50, "south": 20, "north": 90})
-Dashboard.plotly_chart(fig, use_container_width=True)
-#fig.show()
-#st.map(data=seda_map_df, zoom=None, use_container_width=True)
-#st.table(rows)
+# #fig = px.scatter_mapbox(seda_map_df, lat="latitude", lon="longitude", hover_name="NAME", hover_data=["GEOID"],
+#                     #    color_discrete_sequence=["fuchsia"], zoom=3, height=300)
+# fig = px.scatter_mapbox(child_opportunity_df,lat='latitude', lon='longitude', zoom=3, height=300, hover_name='sedaleaname',color_continuous_scale = 'rdylgn', color='subject', size='cs_mn_all_abs' ,text='sedaleaname')#, hover_name='subject')
+# fig.update_layout(mapbox_style="open-street-map")
+# fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+# fig.update_geos(fitbounds="locations")
+# fig.update_layout(mapbox_bounds={"west": -180, "east": -50, "south": 20, "north": 90})
+# Dashboard.plotly_chart(fig, use_container_width=True)
+# #fig.show()
+# #st.map(data=seda_map_df, zoom=None, use_container_width=True)
+# #st.table(rows)
+
+fig_bp_feat_imp = px.box(feature_imp_df, x='Variable', y='Importance', color='Cluster Name', height=600, width=1200)
+
+Dashboard.plotly_chart(fig_bp_feat_imp)
+
 
 Report.header('Team Learning Opportunity Blog Post')
 Report.text('Jay Korrapati and Katie Andrews')
@@ -103,11 +123,3 @@ Report.markdown('''<p style="padding-left: 2em; text-indent: -2em;">Carnoy, M., 
 <p style="padding-left: 2em; text-indent: -2em;">Semuels, A. (2016, August 25). <em>Good school, rich school; bad school, poor school: The inequality at the heart of America's education system.</em> The Atlantic. <a href="https://www.theatlantic.com/business/archive/2016/08/property-taxes-and-unequal-schools/497333/">https://www.theatlantic.com/business/archive/2016/08/property-taxes-and-unequal-schools/497333/</a></p>
 <p style="padding-left: 2em; text-indent: -2em;">United States Census Bureau. (2010). <em>2010: DEC redistricting data (PL 94-171).</em> [Data set]. <a href="https://data.census.gov/cedsci/table?q=Decennial%20Census%20population&g=0100000US%241400000&d=DEC%20Redistricting%20Data%20%28PL%2094-171%29&tid=DECENNIALPL2020.P1">https://data.census.gov/cedsci/table?q=Decennial%20Census%20population&g=0100000US%241400000&d=DEC%20Redistricting%20Data%20%28PL%2094-171%29&tid=DECENNIALPL2020.P1</a></p>
 ''', unsafe_allow_html=True)
-
-
-
-feature_imp_df = pd.read_csv('Data/feature_imp.csv', index_col=0)
-
-fig_bp_feat_imp = px.box(feature_imp_df, x='Variable', y='Importance', color='Cluster Name', height=600, width=1200)
-
-Test_Page.plotly_chart(fig_bp_feat_imp)
