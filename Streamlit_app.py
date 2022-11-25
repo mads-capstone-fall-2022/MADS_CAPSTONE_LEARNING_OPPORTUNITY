@@ -98,6 +98,7 @@ fig_sp_clusters = px.scatter(child_opportunity_df,
                              width=800, 
                              height=600)
 
+Dashboard.plotly_chart(fig_sp_clusters)
 
 
 # Data loading for report sections
