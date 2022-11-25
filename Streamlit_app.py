@@ -85,6 +85,12 @@ fig_bp_feat_imp = px.box(feature_imp_df, x='Variable', y='Importance', color='Cl
 Dashboard.plotly_chart(fig_bp_feat_imp)
 
 
+
+# Data loading for report sections
+model_results_df = pd.read_csv('Data/model_results.csv')
+cross_val_results_df = pd.read_csv('Data/cross_val_results.csv')
+
+
 Report.header('Team Learning Opportunity Blog Post')
 Report.text('Jay Korrapati and Katie Andrews')
 Report.subheader('Introduction')
@@ -104,6 +110,7 @@ Report.subheader('Clustering')
 Report.markdown(f'''We tried K-Means and DBSCAN clustering methods and found a better signal with K-Means.  Our goal was to use the cluster indicators as features in achievement score prediction
 ''')
 Report.subheader('Prediction')
+Report.write(model_results_df)
 
 Report.subheader('Results')
 
