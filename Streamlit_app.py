@@ -34,7 +34,7 @@ Report, Dashboard, Test_Page = st.tabs(["Report Page", "Dashboard Page", "Test P
 
 
 #### DATA LOADING ####
-@st.cache(ttl=600)
+@st.cache(ttl=6000)
 def load_data():
     with open('Data/coi_seda_display_1.pkl', 'rb') as f:
         coi_seda_1_df = pickle.load(f)
@@ -49,13 +49,15 @@ def load_data():
     with open('Data/feature_imp.pkl', 'rb') as f:
         feature_imp_df = pickle.load(f)
 
+    with open('Data/clusters.pkl', 'rb') as f:
+        cluster_df = pickle.load(f)
 
     model_results_df = pd.read_csv('Data/model_results.csv')
     cross_val_results_df = pd.read_csv('Data/cross_val_results.csv')
 
-    return child_opportunity_df, feature_imp_df, model_results_df, cross_val_results_df
+    return child_opportunity_df, feature_imp_df, cluster_df, model_results_df, cross_val_results_df
 
-child_opportunity_df, feature_imp_df, model_results_df, cross_val_results_df = load_data()
+child_opportunity_df, feature_imp_df, cluster_df, model_results_df, cross_val_results_df = load_data()
 
 
 
@@ -65,7 +67,7 @@ Dashboard.title('Compare Achievment Scores on the Same Scale')
 # add filters
 v_segment = Dashboard.selectbox(
      'Which cluster would you like to select',
-     ('All Clusters', 'Cluster 1', 'Cluster 2', 'Cluster 3','Cluster 4'))
+     ('All Clusters', 'Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4'))
 
 v_subject = Dashboard.selectbox(
      'Which subject would you like to select',
@@ -141,7 +143,7 @@ Report.write(cross_val_results_df)
 Report.header('Results', anchor='results')
 Report.subheader('Clustering Results')
 
-fig_sp_clusters = px.scatter(child_opportunity_disp_df, 
+fig_sp_clusters = px.scatter(cluster_df, 
                              x='Component 1', 
                              y='Component 2', 
                              color='cluster', 
