@@ -85,7 +85,7 @@ if v_segment == 'All Clusters':
 else:
     child_opportunity_disp_df = child_opportunity_df[child_opportunity_df['cluster']==int(v_segment[-1])-1]
     v_cluster_name = 'Cluster ' + str(int(v_segment[-1])-1)
-    feature_imp_disp_df = feature_imp_df[feature_imp_df['Cluster Name'][-1]==v_cluster_name]
+    feature_imp_disp_df = feature_imp_df[feature_imp_df['Cluster Name']==v_cluster_name]
 
 #st.set_page_config(layout="wide")
 #fig = make_subplots(rows=1, cols=2)
