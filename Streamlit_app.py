@@ -8,7 +8,7 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 
 st.set_page_config(layout="wide")
-Report, Dashboard, Test_Page = st.tabs(["Report Page", "Dashboard Page"])
+Report, Dashboard = st.tabs(["Report Page", "Dashboard Page"])
 
 
 
