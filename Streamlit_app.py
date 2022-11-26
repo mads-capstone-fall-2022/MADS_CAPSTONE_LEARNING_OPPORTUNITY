@@ -83,8 +83,8 @@ if v_segment == 'All Clusters':
     child_opportunity_disp_df = child_opportunity_df.copy()
     feature_imp_disp_df = feature_imp_df.copy()
 else:
-    child_opportunity_disp_df = child_opportunity_df[child_opportunity_df['cluster']==str(int(v_segment[-1])-1)]
-    feature_imp_disp_df = feature_imp_df[feature_imp_df['Cluster Name'][-1]==str(int(v_segment[-1])-1)]
+    child_opportunity_disp_df = child_opportunity_df[child_opportunity_df['cluster']==int(v_segment[-1])-1]
+    feature_imp_disp_df = feature_imp_df[feature_imp_df['Cluster Name'][-1]==int(v_segment[-1])-1]
 
 #st.set_page_config(layout="wide")
 #fig = make_subplots(rows=1, cols=2)
