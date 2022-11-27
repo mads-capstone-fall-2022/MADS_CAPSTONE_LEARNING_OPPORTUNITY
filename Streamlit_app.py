@@ -68,6 +68,20 @@ seda_df = seda_df[['LEAID','NAME_LEA15','fips','stateabb','sedalea','sedaleaname
 seda_df = seda_df.merge(school_data_for_map_df, on ='sedalea')
 
 
+#clean up the resulting dataframe columns to include on the fields I need for dashboard
+seda_df  = seda_df[['NAME_LEA15', 'stateabb', 'sedalea', 
+       'subject', 'grade', 'seda_year', 'cs_mn_all', 'Cluster Name',
+       'latitude', 'longitude']]
+#rename the sedalean name column
+seda_df = seda_df.rename(columns={"NAME_LEA15": "sedalea_name"})
+
+#convert the data types for the fields latitude(float) , longitude(float), and year(year)
+seda_df.loc[:,'latitude'] = seda_df['latitude'].astype(str).astype(float)
+seda_df.loc[:,'longitude'] = seda_df['longitude'].astype(str).astype(float)
+seda_df.loc['seda_year'] = pd.to_datetime(seda_df.loc[:,'seda_year'], format='%Y')
+
+
+
 Dashboard.text(seda_df.dtypes)
 
 
