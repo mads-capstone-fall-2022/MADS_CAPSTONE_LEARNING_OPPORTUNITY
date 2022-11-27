@@ -63,7 +63,7 @@ cluster_df = coi_df.copy()
 #### DASHBOARD SECTION ####
 Dashboard.title('Compare Achievment Scores on the Same Scale')
 
-d
+
 # add filters at the top
 filter_col1,filter_col2, filter_col3 = Dashboard.columns(3)
 v_segment = filter_col1.selectbox(
