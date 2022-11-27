@@ -146,8 +146,8 @@ v_positive_score_count = seda_disp_df[seda_disp_df['cs_mn_all'].ge(0)]['cs_mn_al
 col1, col2, col3, col4 = st.columns(4)
 col1.metric(label="Number of States", value= v_distinct_states )
 col2.metric(label="Number of School Districts", value=v_distinct_school_districts)
-col3.metric(label="Number of Negative Scores relative to Nationwide Mean", value=v_negative_score_count)
-col4.metric(label="Number of Positive Scores relative to Nationwide Mean", value=v_positive_score_count)
+col3.metric(label="Number of Negative Scores", value=v_negative_score_count, delta=-v_negative_score_count)
+col4.metric(label="Number of Positive Scores", value=v_positive_score_count, delta=v_positive_score_count)
 
 
 #st.set_page_config(layout="wide")
