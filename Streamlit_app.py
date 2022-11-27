@@ -62,7 +62,7 @@ cluster_df = coi_df.copy()
 
 #### DASHBOARD SECTION ####
 Dashboard.title('Compare Achievment Scores on the Same Scale')
-# add filters
+# add filters at the top
 filter_col1,filter_col2, filter_col3 = Dashboard.columns(3)
 v_segment = filter_col1.selectbox(
      'Which cluster would you like to select',
@@ -78,50 +78,28 @@ v_year_choice =  filter_col3.radio(
 
 #filter_col1.slider(
    # 'Year:', min_value=2016, max_value=2018, step=1, value=2016)
+
+
 #join the geo code info to seda data for map visual
 #get a subset of the dataframe columns for building the dashboard
 seda_df = seda_df[['LEAID','NAME_LEA15','fips','stateabb','sedalea','sedaleaname','subject','grade','seda_year','cs_mn_all','Cluster Name']]
 #merge the two data sets so the school district data and latitude and longitude data are in the same place
 seda_df = seda_df.merge(school_data_for_map_df, on ='sedalea')
-
-
 #clean up the resulting dataframe columns to include on the fields I need for dashboard
 seda_df  = seda_df[['NAME_LEA15', 'stateabb', 'sedalea', 
        'subject', 'grade', 'seda_year', 'cs_mn_all', 'Cluster Name',
        'latitude', 'longitude']]
 #rename the sedalean name column
 seda_df = seda_df.rename(columns={"NAME_LEA15": "sedalea_name"})
-
 #convert the data types for the fields latitude(float) , longitude(float), and year(year)
 seda_df.loc[:,'latitude'] = seda_df['latitude'].astype(str).astype(float)
 seda_df.loc[:,'longitude'] = seda_df['longitude'].astype(str).astype(float)
 seda_df.loc['seda_year'] = pd.to_datetime(seda_df.loc[:,'seda_year'], format='%Y')
 
-#Display the distribution plot for all the clusters
-# Add histogram data
-x1 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 1')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
-x2 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 2')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
-x3 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 3')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
-x4 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 4')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
-
-# Group data together
-hist_data = [x1, x2, x3, x4]
-group_labels = ['Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4']
-# Create distplot with custom bin_size
-fig = ff.create_distplot(
-        hist_data, group_labels)
-# Plot
-Dashboard.plotly_chart(fig, use_container_width=True)
 
 
 
 
-
-
-
-
-
-#add latitude and longitude information to the seda_disp_df dataframe
 
 
 
@@ -136,6 +114,35 @@ else:
     seda_disp_df = seda_df[(seda_df['Cluster Name']==v_segment) & (seda_df['seda_year']==v_year_choice) & (seda_df['subject']==v_subject)]
     
     feature_imp_disp_df = feature_imp_df[feature_imp_df['Cluster Name']==v_segment]
+
+
+#add the map visual
+map_visual_col , dist_plot_visual = Dashboard.columns(2)
+
+
+
+#Display the distribution plot for all the clusters
+# Add histogram data
+x1 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 1')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
+x2 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 2')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
+x3 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 3')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
+x4 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 4')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
+
+# Group data together
+hist_data = [x1, x2, x3, x4]
+group_labels = ['Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4']
+# Create distplot with custom bin_size
+fig_dist = ff.create_distplot(
+        hist_data, group_labels)
+# Plot
+dist_plot_visual.plotly_chart(fig_dist, use_container_width=True)
+
+
+
+
+
+
+
 
 
 #get summary stats
