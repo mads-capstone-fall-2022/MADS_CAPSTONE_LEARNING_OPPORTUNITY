@@ -36,15 +36,9 @@ Report, Dashboard = st.tabs(["Report Page", "Dashboard Page"])
 #### DATA LOADING ####
 @st.cache(ttl=6000)
 def load_data():
-    with open('Data/coi_seda_display_1.pkl', 'rb') as f:
-        coi_seda_1_df = pickle.load(f)
-
-    with open('Data/coi_seda_display_2.pkl', 'rb') as f:
-        coi_seda_2_df = pickle.load(f)
-
-    child_opportunity_df = pd.concat([coi_seda_1_df, coi_seda_2_df])
+    with open('Data/coi_seda_display.pkl', 'rb') as f:
+        child_opportunity_df = pickle.load(f)
     child_opportunity_df['cluster'] = child_opportunity_df['cluster'].astype(str)
-
 
     with open('Data/feature_imp.pkl', 'rb') as f:
         feature_imp_df = pickle.load(f)
