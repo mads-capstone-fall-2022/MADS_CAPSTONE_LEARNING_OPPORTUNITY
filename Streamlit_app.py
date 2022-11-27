@@ -45,6 +45,9 @@ def load_data():
     with open('Data/feature_imp.pkl', 'rb') as f:
         feature_imp_df = pickle.load(f)
 
+    with open('Data/school_data_for_map.csv', 'rb') as f:
+        school_data_for_map_df = pandas.read_csv(f)
+
     model_results_df = pd.read_csv('Data/model_results.csv')
     cross_val_results_df = pd.read_csv('Data/cross_val_results.csv')
 
@@ -57,7 +60,7 @@ cluster_df = coi_df.copy()
 
 #### DASHBOARD SECTION ####
 Dashboard.title('Compare Achievment Scores on the Same Scale')
-
+print(school_data_for_map_df.shape)
 # add filters
 v_segment = Dashboard.selectbox(
      'Which cluster would you like to select',
@@ -69,6 +72,9 @@ v_subject = Dashboard.selectbox(
 
 v_year_choice = Dashboard.slider(
     'Year:', min_value=2016, max_value=2018, step=1, value=2016)
+
+#add latitude and longitude information to the seda_disp_df dataframe
+
 
 
 # filter the dataframes
