@@ -60,7 +60,15 @@ cluster_df = coi_df.copy()
 
 #### DASHBOARD SECTION ####
 Dashboard.title('Compare Achievment Scores on the Same Scale')
+
+#join the geo code info to seda data for map visual
 print(school_data_for_map_df.shape)
+print(seda_df.columns)
+
+
+
+
+
 # add filters
 v_segment = Dashboard.selectbox(
      'Which cluster would you like to select',
