@@ -62,11 +62,13 @@ cluster_df = coi_df.copy()
 Dashboard.title('Compare Achievment Scores on the Same Scale')
 
 #join the geo code info to seda data for map visual
-Dashboard.text(seda_df.columns)
+#get a subset of the dataframe columns for building the dashboard
+seda_df = seda_df[['LEAID','NAME_LEA15','fips','stateabb','sedalea','sedaleaname','subject','grade','seda_year','cs_mn_all','Cluster Name']]
+#merge the two data sets so the school district data and latitude and longitude data are in the same place
+seda_df = seda_df.merge(school_data_for_map_df, on ='sedalea')
 
 
-
-
+Dashboard.text(seda_df.dtypes)
 
 
 # add filters
