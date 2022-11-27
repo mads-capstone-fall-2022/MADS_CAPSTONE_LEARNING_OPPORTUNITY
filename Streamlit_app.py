@@ -6,6 +6,8 @@ import streamlit as st
 import pickle
 import plotly.express as px
 from plotly.subplots import make_subplots
+import numpy as np
+import plotly.figure_factory as ff
 
 st.set_page_config(layout="wide")
 Report, Dashboard = st.tabs(["Report Page", "Dashboard Page"])
@@ -82,7 +84,7 @@ seda_df.loc['seda_year'] = pd.to_datetime(seda_df.loc[:,'seda_year'], format='%Y
 
 #Display the distribution plot for all the clusters
 
-import plotly.figure_factory as ff
+
 
 # Add histogram data
 x1 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 1')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
