@@ -148,8 +148,9 @@ group_labels = ['Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4']
 # Create distplot with custom bin_size
 fig_dist = ff.create_distplot(
         hist_data, group_labels)
+fig_dist.update_layout(autosize=True)
 # Plot
-dist_plot_visual.plotly_chart(fig_dist, use_container_width=True)
+dist_plot_visual.plotly_chart(fig_dist)#, use_container_width=True)
 
 
 
