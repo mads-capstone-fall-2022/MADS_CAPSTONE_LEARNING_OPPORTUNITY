@@ -131,7 +131,7 @@ fig_map = px.scatter_mapbox(data_frame=seda_disp_df,lat='latitude', lon='longitu
 fig_map.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 #fig = px.scatter_mapbox(data_frame=child_oppurtunity_index_data_df, lat='latitude', lon='longitude', color='sign', text='sedaleaname', hover_name='subject', size='cs_mn_all_abs')
 
-fig_map.update_layout(mapbox_style="open-street-map")
+fig_map.update_layout(mapbox_style="open-street-map", autosize=True)
 map_visual_col.plotly_chart(fig_map, use_container_width=True)
 
 
