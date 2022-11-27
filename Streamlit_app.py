@@ -96,7 +96,7 @@ group_labels = ['Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4']
 fig = ff.create_distplot(
         hist_data, group_labels)
 # Plot
-st.plotly_chart(fig, use_container_width=True)
+Dashboard.plotly_chart(fig, use_container_width=True)
 
 
 
