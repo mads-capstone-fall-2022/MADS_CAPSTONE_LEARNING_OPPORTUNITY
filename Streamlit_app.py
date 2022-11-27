@@ -74,7 +74,7 @@ v_year_choice = Dashboard.slider(
 # filter the dataframes
 if v_segment == 'All Clusters':
     seda_disp_df = seda_df.copy()
-    seda_disp_df = seda_disp_df[(seda_df['seda_year'] == v_year_choice & seda_df['subject']==v_subject)]
+    seda_disp_df = seda_disp_df[(seda_disp_df['seda_year'] == v_year_choice & seda_disp_df['subject']==v_subject)]
 
     feature_imp_disp_df = feature_imp_df.copy()
 
