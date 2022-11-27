@@ -63,16 +63,16 @@ cluster_df = coi_df.copy()
 #### DASHBOARD SECTION ####
 Dashboard.title('Compare Achievment Scores on the Same Scale')
 # add filters
-filter_col1, map_col1 = Dashboard.columns(2)
+filter_col1,filter_col2, filter_col3 = Dashboard.columns(3)
 v_segment = filter_col1.selectbox(
      'Which cluster would you like to select',
      ('All Clusters', 'Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4'))
 
-v_subject = filter_col1.selectbox(
+v_subject = filter_col2.selectbox(
      'Which subject would you like to select',
      ('Math', 'Reading'))
 
-v_year_choice =  filter_col1.radio(
+v_year_choice =  filter_col3.radio(
     "Select a Year",
     ('2106', '2017', '2018'))
 
