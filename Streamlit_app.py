@@ -87,7 +87,7 @@ v_year_choice =  filter_col3.radio(
 seda_df = seda_df[['LEAID','NAME_LEA15','fips','stateabb','sedalea','sedaleaname','subject','grade','seda_year','cs_mn_all','Cluster Name']]
 #merge the two data sets so the school district data and latitude and longitude data are in the same place
 seda_df = seda_df.merge(school_data_for_map_df, on ='sedalea')
-#clean up the resulting dataframe columns to include on the fields I need for dashboard
+#clean up the resulting dataframe columns to include on the fields We need for dashboard
 seda_df  = seda_df[['NAME_LEA15', 'stateabb', 'sedalea', 
        'subject', 'grade', 'seda_year', 'cs_mn_all', 'Cluster Name',
        'latitude', 'longitude']]
