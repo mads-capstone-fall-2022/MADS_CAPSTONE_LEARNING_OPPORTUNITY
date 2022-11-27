@@ -46,7 +46,7 @@ def load_data():
         feature_imp_df = pickle.load(f)
 
     with open('Data/school_data_for_map.csv', 'rb') as f:
-        school_data_for_map_df = pandas.read_csv(f)
+        school_data_for_map_df = pd.read_csv(f)
 
     model_results_df = pd.read_csv('Data/model_results.csv')
     cross_val_results_df = pd.read_csv('Data/cross_val_results.csv')
