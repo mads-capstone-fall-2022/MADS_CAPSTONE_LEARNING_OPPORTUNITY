@@ -53,7 +53,7 @@ def load_data():
 
     return coi_df, seda_df, feature_imp_df, model_results_df, cross_val_results_df, school_data_for_map_df
 
-coi_df, seda_df, feature_imp_df, model_results_df, cross_val_results_df = load_data()
+coi_df, seda_df, feature_imp_df, model_results_df, cross_val_results_df, school_data_for_map_df = load_data()
 
 cluster_df = coi_df.copy()
 
