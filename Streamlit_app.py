@@ -116,7 +116,13 @@ else:
     feature_imp_disp_df = feature_imp_df[feature_imp_df['Cluster Name']==v_segment]
 
 map_visual_col , dist_plot_visual = Dashboard.columns(2)
-#add the map visual
+#add data processing steps for the map visual
+
+seda_disp_df['sign'] =  np.where(seda_disp_df['cs_mn_all'] >= 0, 'Positive', 'Negative')
+seda_disp_df['cs_mn_all_abs'] = np.abs(seda_disp_df['cs_mn_all'])
+seda_disp_df.loc[:,'cs_mn_all_abs'] = seda_disp_df['cs_mn_all_abs'].astype(str).astype(float)
+
+#create the map configuration
 
 map_visual_col = px.scatter_mapbox(data_frame=seda_disp_df,lat='latitude', lon='longitude', color='sign',color_discrete_sequence=px.colors.qualitative.G10,
                         size='cs_mn_all_abs' ,text='sedaleaname', color_discrete_map = {'Negative': '#AB63FA', 'Positive':'#FECB52'},hover_data = ['sedaleaname','stateabb'])#, hover_name='subject')
