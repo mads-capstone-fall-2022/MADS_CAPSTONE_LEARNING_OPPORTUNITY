@@ -83,34 +83,25 @@ seda_df.loc[:,'longitude'] = seda_df['longitude'].astype(str).astype(float)
 seda_df.loc['seda_year'] = pd.to_datetime(seda_df.loc[:,'seda_year'], format='%Y')
 
 #Display the distribution plot for all the clusters
-
-
-
 # Add histogram data
 x1 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 1')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
-
 x2 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 2')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
-
 x3 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 3')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
-
 x4 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 4')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
 
 # Group data together
 hist_data = [x1, x2, x3, x4]
-
 group_labels = ['Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4']
-
 # Create distplot with custom bin_size
 fig = ff.create_distplot(
         hist_data, group_labels)
-
-# Plot!
+# Plot
 st.plotly_chart(fig, use_container_width=True)
 
 
 
 
-Dashboard.text(seda_df.dtypes)
+
 
 
 # add filters
@@ -140,6 +131,24 @@ else:
     seda_disp_df = seda_df[(seda_df['Cluster Name']==v_segment) & (seda_df['seda_year']==v_year_choice) & (seda_df['subject']==v_subject)]
     
     feature_imp_disp_df = feature_imp_df[feature_imp_df['Cluster Name']==v_segment]
+
+
+#get summary stats
+#get the count of distinct states the school districts are in
+v_distinct_states  = seda_disp_df.stateabb.nunique()
+#get the count of school districts
+v_distinct_school_districts = seda_disp_df.sedalea.nunique()
+#count of negative scores
+v_negative_score_count = seda_disp_df[seda_disp_df['cs_mn_all'].lt(0)]['cs_mn_all'].count()
+#count of scores greater than or equal to zero
+v_positive_score_count = seda_disp_df[seda_disp_df['cs_mn_all'].ge(0)]['cs_mn_all'].count()
+
+col1, col2, col3, col4 = st.columns(4)
+col1.metric(label="Number of States", value= v_distinct_states )
+col2.metric(label="Number of School Districts", value="v_distinct_school_districts")
+col3.metric(label="Number of Negative Scores relative to Nationwide Mean", value="v_negative_score_count")
+col4.metric(label="Number of Positive Scores relative to Nationwide Mean", value="v_positive_score_count")
+
 
 #st.set_page_config(layout="wide")
 #fig = make_subplots(rows=1, cols=2)
