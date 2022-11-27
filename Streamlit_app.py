@@ -1,8 +1,8 @@
 #import geopandas as gpd
-import altair as alt
+#import altair as alt
 import pandas as pd
 import streamlit as st
-from gsheetsdb import connect
+#from gsheetsdb import connect
 import pickle
 import plotly.express as px
 from plotly.subplots import make_subplots
@@ -36,23 +36,23 @@ Report, Dashboard = st.tabs(["Report Page", "Dashboard Page"])
 #### DATA LOADING ####
 @st.cache(ttl=6000)
 def load_data():
-    with open('Data/coi_seda_display.pkl', 'rb') as f:
-        child_opportunity_df = pickle.load(f)
-    child_opportunity_df['cluster'] = child_opportunity_df['cluster'].astype(str)
+    with open('Data/coi_display.pkl', 'rb') as f:
+        coi_df = pickle.load(f)
+
+    with open('Data/seda_display.pkl', 'rb') as f:
+        seda_df = pickle.load(f)
 
     with open('Data/feature_imp.pkl', 'rb') as f:
         feature_imp_df = pickle.load(f)
 
-    with open('Data/clusters.pkl', 'rb') as f:
-        cluster_df = pickle.load(f)
-
     model_results_df = pd.read_csv('Data/model_results.csv')
     cross_val_results_df = pd.read_csv('Data/cross_val_results.csv')
 
-    return child_opportunity_df, feature_imp_df, cluster_df, model_results_df, cross_val_results_df
+    return coi_df, seda_df, feature_imp_df, model_results_df, cross_val_results_df
 
-child_opportunity_df, feature_imp_df, cluster_df, model_results_df, cross_val_results_df = load_data()
+coi_df, seda_df, feature_imp_df, model_results_df, cross_val_results_df = load_data()
 
+cluster_df = coi_df.copy()
 
 
 #### DASHBOARD SECTION ####
@@ -72,16 +72,16 @@ v_year_choice = Dashboard.slider(
 
 
 # filter the dataframes
-child_opportunity_disp_df = child_opportunity_df[child_opportunity_df['seda_year'] == v_year_choice]
-child_opportunity_disp_df = child_opportunity_df[child_opportunity_df['subject']==v_subject]   
-
 if v_segment == 'All Clusters':
-    child_opportunity_disp_df = child_opportunity_df.copy()
+    seda_disp_df = seda_df.copy()
+    seda_disp_df = seda_disp_df[(seda_df['seda_year'] == v_year_choice & seda_df['subject']==v_subject)]
+
     feature_imp_disp_df = feature_imp_df.copy()
+
 else:
-    child_opportunity_disp_df = child_opportunity_df[child_opportunity_df['cluster']==int(v_segment[-1])-1]
-    v_cluster_name = 'Cluster ' + str(int(v_segment[-1])-1)
-    feature_imp_disp_df = feature_imp_df[feature_imp_df['Cluster Name']==v_cluster_name]
+    seda_disp_df = seda_df[(seda_df['cluster']==v_segment) & (seda_df['seda_year'] == v_year_choice & seda_df['subject']==v_subject)]
+    
+    feature_imp_disp_df = feature_imp_df[feature_imp_df['Cluster Name']==v_segment]
 
 #st.set_page_config(layout="wide")
 #fig = make_subplots(rows=1, cols=2)
@@ -140,8 +140,8 @@ Report.subheader('Clustering Results')
 fig_sp_clusters = px.scatter(cluster_df, 
                              x='Component 1', 
                              y='Component 2', 
-                             color='cluster', 
-                             category_orders={'cluster': ['0', '1', '2', '3']}, 
+                             color='Cluster Name', 
+                             #category_orders={'cluster': ['0', '1', '2', '3']}, 
                              hover_name='NAME_LEA15',
                              log_x=True,
                              log_y=True,
