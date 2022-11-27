@@ -143,7 +143,7 @@ v_negative_score_count = seda_disp_df[seda_disp_df['cs_mn_all'].lt(0)]['cs_mn_al
 #count of scores greater than or equal to zero
 v_positive_score_count = seda_disp_df[seda_disp_df['cs_mn_all'].ge(0)]['cs_mn_all'].count()
 
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3, col4 = Dashboard.columns(4)
 col1.metric(label="Number of States", value= v_distinct_states )
 col2.metric(label="Number of School Districts", value=v_distinct_school_districts)
 col3.metric(label="Number of Negative Scores", value=v_negative_score_count)
