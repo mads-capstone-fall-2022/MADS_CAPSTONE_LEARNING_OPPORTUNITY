@@ -115,10 +115,16 @@ else:
     
     feature_imp_disp_df = feature_imp_df[feature_imp_df['Cluster Name']==v_segment]
 
-
-#add the map visual
 map_visual_col , dist_plot_visual = Dashboard.columns(2)
+#add the map visual
 
+map_visual_col = px.scatter_mapbox(data_frame=seda_disp_df,lat='latitude', lon='longitude', color='sign',color_discrete_sequence=px.colors.qualitative.G10,
+                        size='cs_mn_all_abs' ,text='sedaleaname', color_discrete_map = {'Negative': '#AB63FA', 'Positive':'#FECB52'},hover_data = ['sedaleaname','stateabb'])#, hover_name='subject')
+map_visual_col.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+#fig = px.scatter_mapbox(data_frame=child_oppurtunity_index_data_df, lat='latitude', lon='longitude', color='sign', text='sedaleaname', hover_name='subject', size='cs_mn_all_abs')
+
+map_visual_col.update_layout(mapbox_style="open-street-map")
+map_visual_col.show()
 
 
 #Display the distribution plot for all the clusters
