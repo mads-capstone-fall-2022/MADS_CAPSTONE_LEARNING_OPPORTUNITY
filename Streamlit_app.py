@@ -62,7 +62,17 @@ cluster_df = coi_df.copy()
 
 #### DASHBOARD SECTION ####
 Dashboard.title('Compare Achievment Scores on the Same Scale')
+# add filters
+v_segment = Dashboard.selectbox(
+     'Which cluster would you like to select',
+     ('All Clusters', 'Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4'))
 
+v_subject = Dashboard.selectbox(
+     'Which subject would you like to select',
+     ('Math', 'Reading'))
+
+v_year_choice = Dashboard.slider(
+    'Year:', min_value=2016, max_value=2018, step=1, value=2016)
 #join the geo code info to seda data for map visual
 #get a subset of the dataframe columns for building the dashboard
 seda_df = seda_df[['LEAID','NAME_LEA15','fips','stateabb','sedalea','sedaleaname','subject','grade','seda_year','cs_mn_all','Cluster Name']]
@@ -104,17 +114,7 @@ Dashboard.plotly_chart(fig, use_container_width=True)
 
 
 
-# add filters
-v_segment = Dashboard.selectbox(
-     'Which cluster would you like to select',
-     ('All Clusters', 'Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4'))
 
-v_subject = Dashboard.selectbox(
-     'Which subject would you like to select',
-     ('Math', 'Reading'))
-
-v_year_choice = Dashboard.slider(
-    'Year:', min_value=2016, max_value=2018, step=1, value=2016)
 
 #add latitude and longitude information to the seda_disp_df dataframe
 
