@@ -62,6 +62,8 @@ cluster_df = coi_df.copy()
 
 #### DASHBOARD SECTION ####
 Dashboard.title('Compare Achievment Scores on the Same Scale')
+
+d
 # add filters at the top
 filter_col1,filter_col2, filter_col3 = Dashboard.columns(3)
 v_segment = filter_col1.selectbox(
@@ -74,7 +76,7 @@ v_subject = filter_col2.selectbox(
 
 v_year_choice =  filter_col3.radio(
     "Select a Year",
-    (2106, 2017, 2018))
+    (2016, 2017, 2018))
 
 #filter_col1.slider(
    # 'Year:', min_value=2016, max_value=2018, step=1, value=2016)
