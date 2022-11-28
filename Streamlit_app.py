@@ -219,6 +219,7 @@ Dashboard.plotly_chart(fig_bp_feat_imp)
 
 Report.title('Evaluating US School District Achievement Scores Based on Community Resource Levels')
 Report.markdown('Team Learning Opportunity: Jay Korrapati and Katie Andrews')
+
 Report.header('Introduction', anchor='introduction')
 
 Report.markdown('''When school districts in the US are judged, it is usually by comparison to other districts.  Parents use ratings sites like GreatSchools - which uses test scores, graduation rates, and other data (GreatSchools.org, n.d.) - to compare schools when they are looking to move to a new area.  State governments use standardized test scores to rank schools and districts and identify struggling schools (Klein, 2015).  The standardized test scores used in both cases were designed at the state level in response to the 2001 No Child Left Behind federal law, which mandated that states establish tests for reading and math with at least 3 levels of scores: basic, proficient, and advanced (Colorado Department of Education, n.d.).  While much of NCLB has been amended since then, these tests are still used.  
@@ -255,7 +256,7 @@ fig_sp_clusters = px.scatter(cluster_df,
                              x='Component 1', 
                              y='Component 2', 
                              color='Cluster Name', 
-                             #category_orders={'cluster': ['0', '1', '2', '3']}, 
+                             category_orders={'Cluster Name': ['Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster  4']}, 
                              hover_name='NAME_LEA15',
                              log_x=True,
                              log_y=True,
@@ -268,6 +269,7 @@ fig_sp_clusters.update_yaxes(showgrid=False)
 
 Report.plotly_chart(fig_sp_clusters)
 
+
 sp_coi_hist_1 = px.histogram(coi_hist_1, 
                              x='Value', 
                              color='Cluster Name', 
@@ -275,6 +277,8 @@ sp_coi_hist_1 = px.histogram(coi_hist_1,
                              facet_col='COI Variable', 
                              marginal='violin',
                              nbins=50,
+                             width=1200,
+                             height=600,
                              title='Important COI Feature Distributions')
 
 
@@ -284,7 +288,9 @@ sp_coi_hist_2 = px.histogram(coi_hist_2,
                              category_orders={'Cluster Name': ['Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster  4']}, 
                              facet_col='COI Variable', 
                              marginal='violin',
-                             nbins=50)
+                             nbins=50,
+                             width=1200,
+                             height=600)
 
 Report.plotly_chart(sp_coi_hist_1)
 Report.plotly_chart(sp_coi_hist_2)
