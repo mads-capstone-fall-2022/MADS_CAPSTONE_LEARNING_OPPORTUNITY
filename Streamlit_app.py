@@ -247,7 +247,7 @@ Report.markdown('''We tried two clustering methods: K-Means and DBSCAN.  DBSCAN 
 ''')
 
 Report.subheader('Prediction')
-Report.write(cross_val_results_df)
+
 
 Report.header('Results', anchor='results')
 Report.subheader('Clustering Results')
@@ -278,7 +278,7 @@ sp_coi_hist_1 = px.histogram(coi_hist_1,
                              marginal='violin',
                              nbins=50,
                              width=1200,
-                             height=600,
+                             height=500,
                              title='Important COI Feature Distributions')
 
 
@@ -290,10 +290,11 @@ sp_coi_hist_2 = px.histogram(coi_hist_2,
                              marginal='violin',
                              nbins=50,
                              width=1200,
-                             height=600)
+                             height=500)
 
-Report.plotly_chart(sp_coi_hist_1, use_container_width=True, sharing='streamlit')
-Report.plotly_chart(sp_coi_hist_2, use_container_width=True, sharing='streamlit')
+with st.container():
+    Report.plotly_chart(sp_coi_hist_1, use_container_width=True, sharing='streamlit')
+    Report.plotly_chart(sp_coi_hist_2, use_container_width=True, sharing='streamlit')
 
 
 Report.subheader('Prediction Results')
