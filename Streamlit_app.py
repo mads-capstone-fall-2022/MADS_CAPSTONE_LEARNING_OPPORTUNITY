@@ -154,7 +154,17 @@ dist_plot_visual.plotly_chart(fig_dist, use_container_width=True)
 
 
 
+# Prep for COI histograms on report page
+hist_coi_cols = ['ED_ATTAIN', 'ED_MATH', 'ED_READING', 'ED_SCHPOV', 'HE_PM25', 'HE_RSEI', 'SE_PUBLIC', 'SE_SINGLE']
+hist_coi_names = ['Adult Ed Attainment', '3rd Grade Math Proficiency', '3rd Grade Reading Proficiency', 'School Poverty', 
+                   'Airborne Microparticles', 'Industrial Pollutants', 'Public Assistance Rate', 'Single-Headed Households']
+hist_coi_labels = {hist_coi_cols[i]: hist_coi_names[i] for i in range(len(hist_coi_names))}
 
+hist_coi = coi_df.melt(id_vars=['LEAID', 'NAME_LEA15', 'Cluster Name'], value_vars=hist_coi_cols, var_name='COI Variable', value_name='Value').reset_index()
+hist_coi['COI Variable'] = hist_coi['COI Variable'].replace(hist_coi_labels)
+
+coi_hist_1 = hist_coi[hist_coi['COI Variable'].isin(hist_coi_names[:4])]
+coi_hist_2 = hist_coi[hist_coi['COI Variable'].isin(hist_coi_names[4:])]
 
 
 
@@ -220,11 +230,20 @@ To address these concerns, we performed an analysis using two sets of data: the 
 #Report.subheader('dashboard')
 Report.header('Methods', anchor='methods')
 Report.subheader('Data Cleaning')
-Report.markdown(f'''We imputed missing values in COI and computed weighted averages of multiple census tracts before consolidating them by school district
+Report.markdown('''The biggest challenge in preparing our two main datasets - Child Opportunity Index (COI) and Stanford Educational Data Archive (SEDA) - was getting the two on the same geographic scale.  The COI data is at the census tract level.   The SEDA data we chose to use is at the school district level.  There can be multiple census tracts in a district and a tract may also be in multiple districts.  To resolve this, we created a scaled population value for each tract/school district combination by  multiplying the total population of the tract by the percentage of the tract's land area that is in the school district.  This factor was then used as the weight in a weighted average for each COI indicator for each school district.
 ''')
+Report.markdown('''$$COIindicator_{weighted} = \frac {\sum_1^n {COIindicator * (TractPop * LandAreaPercent)}} {\sum_1^n {TractPop * LandAreaPercent}}$$''')
+Report.markdown('''Before computing the weighted average, we performed a train/test split on our data based on the Local Educational Authority Identifiers (LEAIDs).  We then imputed missing values in the COI indicators.  If we had not done so, the averaging process would essentially have treated missing values as zeros.  Since these values were not yet centered at zero, this could represent a high, low, or even outlier value in the indicator's distribution.  For a more consistent impact, we used the column median to fill missing values.  Once imputed and averaged, the indicators were scaled to a mean of zero and standard deviation of 1.  Both the fitted imputer and the fitted scaler were saved for later use when the test set was process similarly.
+''')
+
 Report.subheader('Clustering')
-Report.markdown(f'''We tried K-Means and DBSCAN clustering methods and found a better signal with K-Means.  Our goal was to use the cluster indicators as features in achievement score prediction
+Report.markdown('''The goal of our clustering methods was to use the results to separate the school districts into groups with similar patterns of resource availability.  These groups would allow us to compare SEDA achievement scores between similar districts. 
 ''')
+Report.markdown('''We first performed Principle Component Analysis on the COI data, then clustered based on the first 11 components. 
+''')
+Report.markdown('''We tried two clustering methods: K-Means and DBSCAN.  DBSCAN is a density-based clustering algorithm and it groups together points that are closely packed together (points with many nearby neighbors), marking as outliers points that lie alone in low-density regions. In our case the DBSCAN method found one cluster and a lot of noise points. Our hypothesis is that most of the data points in computed PCA space (reduced dimensions in the latent space) are close to each other.  K-Means was able to separate this dense space to arrive at better groupings. 
+''')
+
 Report.subheader('Prediction')
 Report.write(cross_val_results_df)
 
@@ -248,8 +267,40 @@ fig_sp_clusters.update_yaxes(showgrid=False)
 
 Report.plotly_chart(fig_sp_clusters)
 
+sp_coi_hist_1 = px.histogram(coi_hist_1, 
+                             x='Value', 
+                             color='Cluster Name', 
+                             category_orders={'Cluster Name': ['Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster  4']}, 
+                             facet_col='COI Variable', 
+                             marginal='violin',
+                             nbins=50,
+                             title='Important COI Feature Distributions')
+
+
+sp_coi_hist_2 = px.histogram(coi_hist_2, 
+                             x='Value', 
+                             color='Cluster Name', 
+                             category_orders={'Cluster Name': ['Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster  4']}, 
+                             facet_col='COI Variable', 
+                             marginal='violin',
+                             nbins=50)
+
+Report.plotly_chart(sp_coi_hist_1)
+Report.plotly_chart(sp_coi_hist_2)
+
+
 Report.subheader('Prediction Results')
 Report.write(model_results_df)
+
+fig_rt_feat_imp = px.box(feature_imp_df, 
+                         x='Variable', 
+                         y='Importance', 
+                         color='Cluster Name', 
+                         height=600, 
+                         width=1200, 
+                         title='Model Feature Importance')
+
+Report.plotly_chart(fig_rt_feat_imp)
 
 Report.header('Discussion', anchor='discussion')
 Report.markdown(f'''Learning from other states' educational successes (ref EPI report)''')
@@ -271,3 +322,4 @@ Report.markdown('''<p style="padding-left: 2em; text-indent: -2em;">Carnoy, M., 
 Report.header('Statement of Work', anchor='statement_of_work')
 
 Report.header('Appendix', anchor='appendix')
+Report.write(cross_val_results_df)
