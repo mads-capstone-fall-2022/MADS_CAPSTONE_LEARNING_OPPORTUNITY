@@ -267,7 +267,7 @@ fig_sp_clusters = px.scatter(cluster_df,
 fig_sp_clusters.update_xaxes(showgrid=False)
 fig_sp_clusters.update_yaxes(showgrid=False)
 
-Report.plotly_chart(fig_sp_clusters)
+Report.plotly_chart(fig_sp_clusters, sharing='streamlit')
 
 
 sp_coi_hist_1 = px.histogram(coi_hist_1, 
@@ -292,8 +292,8 @@ sp_coi_hist_2 = px.histogram(coi_hist_2,
                              width=1200,
                              height=600)
 
-Report.plotly_chart(sp_coi_hist_1)
-Report.plotly_chart(sp_coi_hist_2)
+Report.plotly_chart(sp_coi_hist_1, use_container_width=True, sharing='streamlit')
+Report.plotly_chart(sp_coi_hist_2, use_container_width=True, sharing='streamlit')
 
 
 Report.subheader('Prediction Results')
@@ -307,7 +307,7 @@ fig_rt_feat_imp = px.box(feature_imp_df,
                          width=1200, 
                          title='Model Feature Importance')
 
-Report.plotly_chart(fig_rt_feat_imp)
+Report.plotly_chart(fig_rt_feat_imp, use_container_width=True, sharing='streamlit')
 
 Report.header('Discussion', anchor='discussion')
 Report.markdown(f'''Learning from other states' educational successes (ref EPI report)''')
