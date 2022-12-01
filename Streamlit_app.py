@@ -47,9 +47,6 @@ def load_data():
     with open('Data/feature_imp.pkl', 'rb') as f:
         feature_imp_df = pickle.load(f)
 
-    # with open('Data/school_data_for_map.pkl', 'rb') as f:
-    #     school_data_for_map_df = pickle.load(f)
-
     model_results_df = pd.read_csv('Data/model_results.csv')
     cross_val_results_df = pd.read_csv('Data/cross_val_results.csv')
 
@@ -332,4 +329,6 @@ fig_resid = px.scatter(seda_df,
                        labels=dict(predictions='Predicted Values', residuals='Residuals'),
                        title='Residuals for All-Cluster Model'
                        )
-Report.plotly_chart(fig_resid)
+fig_resid.update_xaxes(showgrid=False)
+fig_resid.update_yaxes(showgrid=False)
+Report.plotly_chart(fig_resid, use_container_width=True)
