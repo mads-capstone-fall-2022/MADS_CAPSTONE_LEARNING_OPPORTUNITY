@@ -110,9 +110,10 @@ seda_disp_df['sign'] =  np.where(seda_disp_df['cs_mn_all'] >= 0, 'Positive', 'Ne
 seda_disp_df['cs_mn_all_abs'] = np.abs(seda_disp_df['cs_mn_all'])
 seda_disp_df.loc[:,'cs_mn_all_abs'] = seda_disp_df['cs_mn_all_abs'].astype(str).astype(float)
 
-Dashboard.metric(label='Num NaN', value=seda_disp_df['cs_mn_all'].isna().count())
-#create the map configuration
+Dashboard.metric(label='Num NaN', value=seda_disp_df[seda_disp_df['cs_mn_all'].isna()].count())
 
+
+#create the map configuration
 fig_map = px.scatter_mapbox(data_frame=seda_disp_df,lat='latitude', lon='longitude', color='sign',color_discrete_sequence=px.colors.qualitative.G10,
                         zoom = 2,size='cs_mn_all_abs' ,text='sedalea_name', color_discrete_map = {'Negative': '#AB63FA', 'Positive':'#FECB52'},hover_data = ['sedalea_name','stateabb'], hover_name='sedalea_name')
 fig_map.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
