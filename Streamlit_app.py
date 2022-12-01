@@ -82,20 +82,20 @@ v_year_choice =  filter_col3.radio(
    # 'Year:', min_value=2016, max_value=2018, step=1, value=2016)
 
 
-#join the geo code info to seda data for map visual
-#get a subset of the dataframe columns for building the dashboard
-seda_df = seda_df[['LEAID','NAME_LEA15','fips','stateabb','sedalea','sedaleaname','subject','grade','seda_year','cs_mn_all','Cluster Name']]
-#merge the two data sets so the school district data and latitude and longitude data are in the same place
-seda_df = seda_df.merge(school_data_for_map_df, on ='sedalea')
-#clean up the resulting dataframe columns to include on the fields We need for dashboard
-seda_df  = seda_df[['NAME_LEA15', 'stateabb', 'sedalea', 
-       'subject', 'grade', 'seda_year', 'cs_mn_all', 'Cluster Name',
-       'latitude', 'longitude']]
+# #join the geo code info to seda data for map visual
+# #get a subset of the dataframe columns for building the dashboard
+# seda_df = seda_df[['LEAID','NAME_LEA15','fips','stateabb','sedalea','sedaleaname','subject','grade','seda_year','cs_mn_all','Cluster Name']]
+# #merge the two data sets so the school district data and latitude and longitude data are in the same place
+# seda_df = seda_df.merge(school_data_for_map_df, on ='sedalea')
+# #clean up the resulting dataframe columns to include on the fields We need for dashboard
+# seda_df  = seda_df[['NAME_LEA15', 'stateabb', 'sedalea', 
+#        'subject', 'grade', 'seda_year', 'cs_mn_all', 'Cluster Name',
+#        'latitude', 'longitude']]
 #rename the sedalean name column
 seda_df = seda_df.rename(columns={"NAME_LEA15": "sedalea_name"})
 #convert the data types for the fields latitude(float) , longitude(float), and year(year)
-seda_df.loc[:,'latitude'] = seda_df['latitude'].astype(str).astype(float)
-seda_df.loc[:,'longitude'] = seda_df['longitude'].astype(str).astype(float)
+seda_df.loc[:,'latitude'] = seda_df['latitude'].astype(float)
+seda_df.loc[:,'longitude'] = seda_df['longitude'].astype(float)
 seda_df.loc['seda_year'] = pd.to_datetime(seda_df.loc[:,'seda_year'], format='%Y')
 
 
