@@ -47,15 +47,15 @@ def load_data():
     with open('Data/feature_imp.pkl', 'rb') as f:
         feature_imp_df = pickle.load(f)
 
-    with open('Data/school_data_for_map.pkl', 'rb') as f:
-        school_data_for_map_df = pickle.load(f)
+    # with open('Data/school_data_for_map.pkl', 'rb') as f:
+    #     school_data_for_map_df = pickle.load(f)
 
     model_results_df = pd.read_csv('Data/model_results.csv')
     cross_val_results_df = pd.read_csv('Data/cross_val_results.csv')
 
-    return coi_df, seda_df, feature_imp_df, model_results_df, cross_val_results_df, school_data_for_map_df
+    return coi_df, seda_df, feature_imp_df, model_results_df, cross_val_results_df
 
-coi_df, seda_df, feature_imp_df, model_results_df, cross_val_results_df, school_data_for_map_df = load_data()
+coi_df, seda_df, feature_imp_df, model_results_df, cross_val_results_df = load_data()
 
 cluster_df = coi_df.copy()
 
@@ -94,8 +94,8 @@ v_year_choice =  filter_col3.radio(
 #rename the sedalean name column
 seda_df = seda_df.rename(columns={"NAME_LEA15": "sedalea_name"})
 #convert the data types for the fields latitude(float) , longitude(float), and year(year)
-seda_df.loc[:,'latitude'] = seda_df['latitude'].astype(str).astype(float)
-seda_df.loc[:,'longitude'] = seda_df['longitude'].astype(str).astype(float)
+# seda_df.loc[:,'latitude'] = seda_df['latitude'].astype(str).astype(float)
+# seda_df.loc[:,'longitude'] = seda_df['longitude'].astype(str).astype(float)
 seda_df.loc['seda_year'] = pd.to_datetime(seda_df.loc[:,'seda_year'], format='%Y')
 
 
