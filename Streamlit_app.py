@@ -110,6 +110,7 @@ seda_disp_df['sign'] =  np.where(seda_disp_df['cs_mn_all'] >= 0, 'Positive', 'Ne
 seda_disp_df['cs_mn_all_abs'] = np.abs(seda_disp_df['cs_mn_all'])
 seda_disp_df.loc[:,'cs_mn_all_abs'] = seda_disp_df['cs_mn_all_abs'].astype(str).astype(float)
 
+Dashboard.metric(label='Num NaN', value=seda_disp_df['cs_mn_all'].isna().count())
 #create the map configuration
 
 fig_map = px.scatter_mapbox(data_frame=seda_disp_df,lat='latitude', lon='longitude', color='sign',color_discrete_sequence=px.colors.qualitative.G10,
@@ -327,8 +328,10 @@ fig_resid = px.scatter(seda_df,
                        y='residuals', 
                        opacity=0.25, 
                        labels=dict(predictions='Predicted Values', residuals='Residuals'),
-                       title='Residuals for All-Cluster Model'
+                       title='Residuals for All-Cluster Model',
+                       height=800,
+                       width=800
                        )
 fig_resid.update_xaxes(showgrid=False)
 fig_resid.update_yaxes(showgrid=False)
-Report.plotly_chart(fig_resid, use_container_width=True)
+Report.plotly_chart(fig_resid)
