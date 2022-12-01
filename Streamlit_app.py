@@ -94,8 +94,8 @@ v_year_choice =  filter_col3.radio(
 #rename the sedalean name column
 seda_df = seda_df.rename(columns={"NAME_LEA15": "sedalea_name"})
 #convert the data types for the fields latitude(float) , longitude(float), and year(year)
-seda_df.loc[:,'latitude'] = seda_df['latitude'].astype(float)
-seda_df.loc[:,'longitude'] = seda_df['longitude'].astype(float)
+seda_df.loc[:,'latitude'] = seda_df['latitude'].astype(str).astype(float)
+seda_df.loc[:,'longitude'] = seda_df['longitude'].astype(str).astype(float)
 seda_df.loc['seda_year'] = pd.to_datetime(seda_df.loc[:,'seda_year'], format='%Y')
 
 
