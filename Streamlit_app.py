@@ -206,15 +206,17 @@ Dashboard.plotly_chart(fig_bp_feat_imp)
 Report.title('Evaluating US School District Achievement Scores Based on Community Resource Levels')
 Report.markdown('Team Learning Opportunity: Jay Korrapati and Katie Andrews')
 
+
 Report.header('Introduction', anchor='introduction')
-
 Report.markdown('''When school districts in the US are judged, it is usually by comparison to other districts.  Parents use ratings sites like GreatSchools - which uses test scores, graduation rates, and other data (GreatSchools.org, n.d.) - to compare schools when they are looking to move to a new area.  State governments use standardized test scores to rank schools and districts and identify struggling schools (Klein, 2015).  The standardized test scores used in both cases were designed at the state level in response to the 2001 No Child Left Behind federal law, which mandated that states establish tests for reading and math with at least 3 levels of scores: basic, proficient, and advanced (Colorado Department of Education, n.d.).  While much of NCLB has been amended since then, these tests are still used.  
-
-But are such direct comparisons between school districts fair, or even enlightening?  Since US schools are primarily funded at the local level, not state or federal, there is a wide variety in school financial expenditure (Semuels, 2016).  Also, communities may have different levels of non-financial resources supporting education.  The test scores themselves are not directly comparable, since each state has a different set of tests.
-
-To address these concerns, we performed an analysis using two sets of data: the Child Opportunity Index (Diversitydatakids.org, 2022) and the Stanford Educational Data Archive (Reardon et al., 2021).  The Child Opportunity Index (COI) is a holistic view of the resources available to children in a community, including indicators such as access to healthy food, 3rd grade reading and math scores, percentage of the population with health insurance, school financial expenditure, and average educational attainment by adults in the area.  The Stanford Educational Data Archive (SEDA) baselines state standardized test scores in reading and math against a common national test (the National Assessment of Educational Progress (NAEP)) in order to allow between-state comparisons.  In our analysis, we used the COI data to cluster school districts across the US and to predict SEDA scores.  This provided us with a view to which school districts are doing better than others from similar backgrounds.  
 ''')
-#Report.subheader('dashboard')
+Report.markdown('''But are such direct comparisons between school districts fair, or even enlightening?  Since US schools are primarily funded at the local level, not state or federal, there is a wide variety in school financial expenditure (Semuels, 2016).  Also, communities may have different levels of non-financial resources supporting education.  The test scores themselves are not directly comparable, since each state has a different set of tests.
+''')
+Report.markdown('''To address these concerns, we performed an analysis using two sets of data: the Child Opportunity Index (Diversitydatakids.org, 2022) and the Stanford Educational Data Archive (Reardon et al., 2021). The Child Opportunity Index (COI) is a holistic view of the resources available to children in a community, including indicators such as access to healthy food, 3rd grade reading and math scores, percentage of the population with health insurance, school financial expenditure, and average educational attainment by adults in the area. The Stanford Educational Data Archive (SEDA) baselines state standardized test scores in reading and math against a common national test (the National Assessment of Educational Progress (NAEP)) in order to allow between-state comparisons. For SEDA scores, 0 represents the national average, with positive scores representing grade years above average and negative scores representing grade years below average.  A score of 1 means that the students in the district scored one grade level higher than average; -1 means that they scored one grade level lower than average.
+''')
+Report.markdown('''In our analysis, we used the COI data to cluster school districts across the US and to predict SEDA scores. This provided us with a view to which school districts are doing better than others from similar backgrounds.  With the results of this analysis, we created a dashboard to allow parents and school administrators to explore the COI and SEDA data.  This dashboard is available on the second tab at the top of this page.
+''')
+
 
 Report.header('Methods', anchor='methods')
 Report.subheader('Data Cleaning')
@@ -223,20 +225,35 @@ Report.markdown('''The biggest challenge in preparing our two main datasets - Ch
 Report.latex(r'''COIindicator_{weighted} = \frac {\sum_1^n {COIindicator * (TractPop * LandAreaPercent)}} {\sum_1^n {TractPop * LandAreaPercent}}''')
 Report.markdown('''Before computing the weighted average, we performed a train/test split on our data based on the Local Educational Authority Identifiers (LEAIDs).  We then imputed missing values in the COI indicators.  If we had not done so, the averaging process would essentially have treated missing values as zeros.  Since these values were not yet centered at zero, this could represent a high, low, or even outlier value in the indicator's distribution.  For a more consistent impact, we used the column median to fill missing values.  Once imputed and averaged, the indicators were scaled to a mean of zero and standard deviation of 1.  Both the fitted imputer and the fitted scaler were saved for later use when the test set was process similarly.
 ''')
+Report.markdown('''We chose to use the most current available data, so we used the 2015 COI data (a 2010 set is also available).  This dataset includes as features the 3rd grade reading and math scores sourced from SEDA.  Therefore, when preparing the data for prediction tasks, we removed the 3rd grade scores from the target SEDA set and predicted only grades 4 through 8.  Since we were starting from 2015 COI data, we also subsetted the SEDA data to include only 2016-2018 scores.  The scores represented on the dashboard are only for the 4th grade for each of the three years.  The SEDA project directly measured 4th grade scores - that is one of the years that the NAEP test is taken 0 - so these scores are not interpolated as some of the other grade years are.  
+''')
+
 
 Report.subheader('Clustering')
-Report.markdown('''The goal of our clustering methods was to use the results to separate the school districts into groups with similar patterns of resource availability.  These groups would allow us to compare SEDA achievement scores between similar districts. 
+Report.markdown('''The goal of our clustering methods was to use the results to separate school districts into groups with similar patterns of resource availability.  These groups would allow us to compare SEDA achievement scores between similar districts.
 ''')
-Report.markdown('''We first performed Principle Component Analysis on the COI data, then clustered based on the first 11 components. 
+Report.markdown('''We first performed Principle Component Analysis on the COI data, then clustered based on the first 11 components.  We chose 11 because those components represented explained 80% of the variance in the data.
 ''')
-Report.markdown('''We tried two clustering methods: K-Means and DBSCAN.  DBSCAN is a density-based clustering algorithm and it groups together points that are closely packed together (points with many nearby neighbors), marking as outliers points that lie alone in low-density regions. In our case the DBSCAN method found one cluster and a lot of noise points. Our hypothesis is that most of the data points in computed PCA space (reduced dimensions in the latent space) are close to each other.  K-Means was able to separate this dense space to arrive at better groupings. 
+Report.markdown('''# Why PCA?
+''')
+Report.markdown('''We tried two clustering methods: K-Means and DBSCAN.  DBSCAN is a density-based clustering algorithm and it groups together points that are closely packed together (points with many nearby neighbors), marking as outliers points that lie alone in low-density regions. In our case the DBSCAN method found one cluster and a lot of noise points. Our hypothesis is that most of the data points in computed PCA space (reduced dimensions in the latent space) are close to each other.  K-Means was able to separate this dense space to arrive at better groupings.
 ''')
 
+
 Report.subheader('Prediction')
+Report.markdown('''Our predictor variables were the COI indicators; population levels (both children-only and total population); the SEDA year, grade level, and subject (reading or math); and the cluster label resulting from the K-Means model.  We chose the mean score for all students as the target variable from the SEDA dataset for our prediction tasks.  Using this target, we tried several prediction methods, outlined in the table below, including linear, tree-based, and histogram-based models.  Once the most promising model was selected, we performed hyperparameter tuning cross-validation to optimize model performance. 
+''')
+Report.markdown('''Our goal in creating these models was less to create a highly accurate prediction and more to investigate the predictive power of the community resource indicators from the COI dataset.  We explored running a single model for all school districts and also running different predictive models for each cluster. The intuition was that grade achievement scores are related to the COI data, so segmenting on clustered school districts would give us better prediction accuracy and insight into potentially different COI variables impacting each model.
+''')
 
 
 Report.header('Results', anchor='results')
 Report.subheader('Clustering Results')
+Report.markdown('''As an unsupervised learning method, K-Means clustering does not have a ground truth on which to base an accuracy score.  Also, K-Means requires a pre-specified number of clusters as a parameter.  We chose cluster inertia - a measure of closeness within the cluster and difference between clusters - to determine the best number. We used a scree plot to identify 4 clusters as optimal based on the change in cluster inertia as the number of clusters  increased.
+''')
+Report.markdown('''We discovered that one of the resulting clusters was very small (4 districts), but consisted of 4 enormous metropolitan districts (New York, Los Angeles, Dade County (Miami), and Chicago). The other 3 clusters were both more diverse and closer in size with 4710, 2539, and 3594 school districts, respectively.  The below plot shows the clusters based on the first 2 PCA components.  As can be seen, the small cluster (Cluster 2), is in the upper right of the plot.  The remaining clusters are densely packed.  This density is what caused the DBSCAN clustering algorithm to be ineffective, just finding 1 cluster and many outliers.  This visualization uses log-scale axes to spread out the tightly grouped clusters to make the divisions more visible. 
+''')
+
 
 fig_sp_clusters = px.scatter(cluster_df, 
                              x='Component 1', 
@@ -254,6 +271,25 @@ fig_sp_clusters.update_xaxes(showgrid=False)
 fig_sp_clusters.update_yaxes(showgrid=False)
 
 Report.plotly_chart(fig_sp_clusters, sharing='streamlit')
+
+Report.markdown('''We created dashboard visualizations to represent these clusters of school districts across the US and represent the relative achievement scores. This allows dashboard users to more objectively compare achievement across school districts. 
+''')
+Report.markdown('''# A year over year comparison would help track how scores are changing.  Are we doing this?
+''')
+
+
+Report.subheader('Prediction Results')
+Report.write(model_results_df)
+
+fig_rt_feat_imp = px.box(feature_imp_df, 
+                         x='Variable', 
+                         y='Importance', 
+                         color='Cluster Name', 
+                         height=800, 
+                         width=1200, 
+                         title='Model Feature Importance')
+
+Report.plotly_chart(fig_rt_feat_imp, use_container_width=True, sharing='streamlit')
 
 
 sp_coi_hist_1 = px.histogram(coi_hist_1, 
@@ -283,18 +319,6 @@ with st.container():
     Report.plotly_chart(sp_coi_hist_2, use_container_width=True, sharing='streamlit')
 
 
-Report.subheader('Prediction Results')
-Report.write(model_results_df)
-
-fig_rt_feat_imp = px.box(feature_imp_df, 
-                         x='Variable', 
-                         y='Importance', 
-                         color='Cluster Name', 
-                         height=800, 
-                         width=1200, 
-                         title='Model Feature Importance')
-
-Report.plotly_chart(fig_rt_feat_imp, use_container_width=True, sharing='streamlit')
 
 Report.header('Discussion', anchor='discussion')
 Report.markdown(f'''Learning from other states' educational successes (ref EPI report)''')
