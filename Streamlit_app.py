@@ -127,10 +127,18 @@ map_visual_col.plotly_chart(fig_map, use_container_width=True)
 
 #Display the distribution plot for all the clusters
 # Add histogram data
-x1 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 1')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
-x2 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 2')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
-x3 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 3')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
-x4 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 4')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
+#x1 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 1')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
+#x2 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 2')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
+#x3 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 3')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
+#x4 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 4')&(seda_df['seda_year']==2016)&(seda_df['subject']=='Math')]['cs_mn_all'], dtype='float')
+
+#make the histogram selection dynamic
+x1 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 1')&(seda_df['seda_year']==v_year_choice)&(seda_df['subject']==v_subject)]['cs_mn_all'], dtype='float')
+x2 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 2')&(seda_df['seda_year']==v_year_choice)&(seda_df['subject']==v_subject)]['cs_mn_all'], dtype='float')
+x3 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 3')&(seda_df['seda_year']==v_year_choice)&(seda_df['subject']==v_subject)]['cs_mn_all'], dtype='float')
+x4 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 4')&(seda_df['seda_year']==v_year_choice)&(seda_df['subject']==v_subject)]['cs_mn_all'], dtype='float')
+
+
 
 # Group data together
 hist_data = [x1, x2, x3, x4]
