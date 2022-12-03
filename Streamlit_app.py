@@ -329,7 +329,8 @@ Report.markdown(f'''Learning from other states' educational successes (ref EPI r
 
 
 Report.header('Statement of Work', anchor='statement_of_work')
-
+Report.markdown('''Katie Andrews: ''')
+Report.markdown('''Jayachandra Korrapati: Data processing, Principal Component Analysis, Clustering methods, Environment setup and Configuration''')
 
 Report.header('References', anchor='references')
 Report.markdown('''<p style="padding-left: 2em; text-indent: -2em;">Carnoy, M., García, E., & Khavenson, T. (2015, October 30). <em>Bringing it back home:  Why state comparisons are more useful than international comparisons for improving U.S. education policy.</em> Economic Policy Institute. <a href="https://www.epi.org/publication/bringing-it-back-home-why-state-comparisons-are-more-useful-than-international-comparisons-for-improving-u-s-education-policy/">https://www.epi.org/publication/bringing-it-back-home-why-state-comparisons-are-more-useful-than-international-comparisons-for-improving-u-s-education-policy/</a> </p>
