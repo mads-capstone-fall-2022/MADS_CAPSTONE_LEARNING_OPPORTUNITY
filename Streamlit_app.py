@@ -62,7 +62,7 @@ cluster_df = coi_df.copy()
 
 
 #### DASHBOARD SECTION ####
-Dashboard.title('Compare Achievment Scores on the Same Scale')
+Dashboard.title('Student Achievment Scores on the Same Scale')
 
 
 # add filters at the top
@@ -171,10 +171,10 @@ v_negative_score_count = seda_disp_df[seda_disp_df['cs_mn_all'].lt(0)]['cs_mn_al
 v_positive_score_count = seda_disp_df[seda_disp_df['cs_mn_all'].ge(0)]['cs_mn_all'].count()
 
 col1, col2, col3, col4 = Dashboard.columns(4)
-col1.metric(label="Number of States", value= v_distinct_states )
-col2.metric(label="Number of School Districts", value=v_distinct_school_districts)
-col3.metric(label="Number of Negative Scores", value=v_negative_score_count)
-col4.metric(label="Number of Positive Scores", value=v_positive_score_count)
+col1.metric(label="Number of States", value= v_distinct_states , help="The number of States the School districts in the above selection fall in")
+col2.metric(label="Number of School Districts", value=v_distinct_school_districts, help="Number of School districts in the filter selection above")
+col3.metric(label="Number of Negative Scores", value=v_negative_score_count, help="Number of School districts with negative scores relative to the mean 4th grade score")
+col4.metric(label="Number of Positive Scores", value=v_positive_score_count, help="Number of School districts with positive scores relative to the mean 4th grade score")
 
 
 #st.set_page_config(layout="wide")
@@ -330,7 +330,7 @@ Report.markdown(f'''Learning from other states' educational successes (ref EPI r
 
 Report.header('Statement of Work', anchor='statement_of_work')
 Report.markdown('''Katie Andrews: ''')
-Report.markdown('''Jayachandra Korrapati: Data processing, Principal Component Analysis, Clustering methods, Environment setup and Configuration''')
+Report.markdown('''Jayachandra Korrapati: Data processing, Principal Component Analysis, Clustering methods, Environment setup and Configuration, and Dashboard''')
 
 Report.header('References', anchor='references')
 Report.markdown('''<p style="padding-left: 2em; text-indent: -2em;">Carnoy, M., García, E., & Khavenson, T. (2015, October 30). <em>Bringing it back home:  Why state comparisons are more useful than international comparisons for improving U.S. education policy.</em> Economic Policy Institute. <a href="https://www.epi.org/publication/bringing-it-back-home-why-state-comparisons-are-more-useful-than-international-comparisons-for-improving-u-s-education-policy/">https://www.epi.org/publication/bringing-it-back-home-why-state-comparisons-are-more-useful-than-international-comparisons-for-improving-u-s-education-policy/</a> </p>
