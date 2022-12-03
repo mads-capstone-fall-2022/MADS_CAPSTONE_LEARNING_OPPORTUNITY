@@ -1,18 +1,21 @@
 #import geopandas as gpd
-#import altair as alt
+import numpy as np
 import pandas as pd
 import streamlit as st
-#from gsheetsdb import connect
 import pickle
 import plotly.express as px
 from plotly.subplots import make_subplots
-import numpy as np
 import plotly.figure_factory as ff
+import plotly.graph_objects as go
+import plotly.io as pio
 
 st.set_page_config(layout="wide")
 Report, Dashboard = st.tabs(["Report Page", "Dashboard Page"])
 
-
+pio.templates['TLO'] = go.layout.Template(
+    layout=go.Layout(title_font=dict(family="Rockwell", size=24))
+)
+pio.templates.default = 'plotly+TLO'
 
 
 # # Create a connection object.
