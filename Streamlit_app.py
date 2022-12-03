@@ -13,7 +13,8 @@ st.set_page_config(layout="wide")
 Report, Dashboard = st.tabs(["Report Page", "Dashboard Page"])
 
 pio.templates['TLO'] = go.layout.Template(
-    layout=go.Layout(title_font=dict(family="Rockwell", size=24))
+    layout=go.Layout(font=dict(family='Rockwell', size=12), title_font=dict(size=24)
+    )
 )
 pio.templates.default = 'plotly+TLO'
 
