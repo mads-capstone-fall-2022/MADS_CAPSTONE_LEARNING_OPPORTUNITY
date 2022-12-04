@@ -145,9 +145,9 @@ dist_plot_visual.plotly_chart(fig_dist, use_container_width=True)
 
 
 # Prep for COI histograms on report page
-hist_coi_cols = ['ED_ATTAIN', 'ED_MATH', 'ED_READING', 'ED_SCHPOV', 'HE_PM25', 'HE_RSEI', 'SE_PUBLIC', 'SE_SINGLE']
-hist_coi_names = ['Adult Ed Attainment', '3rd Grade Math Proficiency', '3rd Grade Reading Proficiency', 'School Poverty', 
-                   'Airborne Microparticles', 'Industrial Pollutants', 'Public Assistance Rate', 'Single-Headed Households']
+hist_coi_cols = ['ED_SCHPOV', 'ED_MATH', 'ED_READING', 'ED_ATTAIN', 'SE_SINGLE', 'HE_HLTHINS', 'HE_PM25', 'HE_RSEI']
+hist_coi_names = ['School Poverty', '3rd Grade Math Proficiency', '3rd Grade Reading Proficiency', 'Adult Ed Attainment', 
+                  'Single-Headed Households', 'Health Insurance Coverage', 'Airborne Microparticles', 'Industrial Pollutants']
 hist_coi_labels = {hist_coi_cols[i]: hist_coi_names[i] for i in range(len(hist_coi_names))}
 
 hist_coi = coi_df.melt(id_vars=['LEAID', 'NAME_LEA15', 'Cluster Name'], value_vars=hist_coi_cols, var_name='COI Variable', value_name='Value').reset_index()
@@ -282,7 +282,7 @@ fig_sp_clusters.update_yaxes(showgrid=False)
 
 Report.plotly_chart(fig_sp_clusters, sharing='streamlit')
 
-Report.markdown('''There are two caveats about our clustering results.  The above plot shows districts that were present in both the COI and SEDA data.  Since the state of New York did not submit scores for 2016-2018, any New York school districts are excluded.  Also, when the K-Means cluster model that we trained on the training data was applied to the held-out test set, we found that no new school districts were added to Cluster 3 (the large, metropolitan districts cluster).
+Report.markdown('''There is a caveat about our clustering results.  When the trained K-Means cluster model was applied to the held-out test set, we found that no new school districts were added to Cluster 3 (the large, metropolitan districts cluster).
 ''')
 Report.markdown('''We created dashboard visualizations to represent these clusters of school districts across the US and represent the relative achievement scores. This allows dashboard users to more objectively compare achievement across school districts. 
 ''')
@@ -307,7 +307,7 @@ fig_model_results = go.Figure(data=[go.Table(columnwidth = [300, 300, 100, 100, 
                                                         font=dict(color='white', size=14),
                                                         format=[None, None, None, '.4f', '.4f']))])
 fig_model_results.update_layout(
-    height=300,
+    height=500,
     width=1000,
     showlegend=False,
     title_text='Predictive Model Results',
