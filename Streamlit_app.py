@@ -213,7 +213,7 @@ Dashboard.plotly_chart(fig_bp_feat_imp, use_container_width=True)
 #### REPORT SECTION ####
 
 Report.title('Evaluating US School District Achievement Scores Based on Community Resource Levels')
-Report.markdown('Team Learning Opportunity: Jay Korrapati and Katie Andrews')
+Report.markdown('Team Learning Opportunity: Jayachandra Korrapati and Katie Andrews')
 
 
 Report.header('Introduction', anchor='introduction')
@@ -337,8 +337,9 @@ Report.markdown('''Learning from other states' educational successes (ref EPI re
 
 
 Report.header('Statement of Work', anchor='statement_of_work')
-Report.markdown('''Katie Andrews: ''')
-Report.markdown('''Jayachandra Korrapati: Data processing, Principal Component Analysis, Clustering methods, Environment setup and Configuration, and Dashboard''')
+Report.markdown('''Katie Andrews: Data processing, prediction methods and feature importance, and report''')
+Report.markdown('''Jayachandra Korrapati: Data processing, Principal Component Analysis, clustering methods, environment setup and configuration, and dashboard''')
+
 
 Report.header('References', anchor='references')
 Report.markdown('''<p style="padding-left: 2em; text-indent: -2em;">Carnoy, M., García, E., & Khavenson, T. (2015, October 30). <em>Bringing it back home:  Why state comparisons are more useful than international comparisons for improving U.S. education policy.</em> Economic Policy Institute. <a href="https://www.epi.org/publication/bringing-it-back-home-why-state-comparisons-are-more-useful-than-international-comparisons-for-improving-u-s-education-policy/">https://www.epi.org/publication/bringing-it-back-home-why-state-comparisons-are-more-useful-than-international-comparisons-for-improving-u-s-education-policy/</a> </p>
@@ -353,6 +354,7 @@ Report.markdown('''<p style="padding-left: 2em; text-indent: -2em;">Carnoy, M., 
 <p style="padding-left: 2em; text-indent: -2em;">Semuels, A. (2016, August 25). <em>Good school, rich school; bad school, poor school: The inequality at the heart of America's education system.</em> The Atlantic. <a href="https://www.theatlantic.com/business/archive/2016/08/property-taxes-and-unequal-schools/497333/">https://www.theatlantic.com/business/archive/2016/08/property-taxes-and-unequal-schools/497333/</a></p>
 <p style="padding-left: 2em; text-indent: -2em;">United States Census Bureau. (2010). <em>2010: DEC redistricting data (PL 94-171).</em> [Data set]. <a href="https://data.census.gov/cedsci/table?q=Decennial%20Census%20population&g=0100000US%241400000&d=DEC%20Redistricting%20Data%20%28PL%2094-171%29&tid=DECENNIALPL2020.P1">https://data.census.gov/cedsci/table?q=Decennial%20Census%20population&g=0100000US%241400000&d=DEC%20Redistricting%20Data%20%28PL%2094-171%29&tid=DECENNIALPL2020.P1</a></p>
 ''', unsafe_allow_html=True)
+
 
 Report.header('Appendix', anchor='appendix')
 Report.write(cross_val_results_df)
