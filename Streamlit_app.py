@@ -295,10 +295,10 @@ Report.markdown('''The primary goal of our prediction activies was to indentify 
 ''')
 
 fig_model_results = go.Figure(data=[go.Table(columnwidth = [300, 300, 100, 100, 100],
-                                             header=dict(values=list(model_results.columns)), 
-                                             cells=dict(values=[model_results['Model'], model_results['Hyperparameters'], 
-                                                                model_results['Cluster'], model_results['Training Set Score'], 
-                                                                model_results['Test Set Score']], 
+                                             header=dict(values=list(model_results_df.columns)), 
+                                             cells=dict(values=[model_results_df['Model'], model_results_df['Hyperparameters'], 
+                                                                model_results_df['Cluster'], model_results_df['Training Set Score'], 
+                                                                model_results_df['Test Set Score']], 
                                                         align=['left', 'left', 'left', 'right', 'right']))])
 fig_model_results.update_traces(cells={'format':[None, None, None, '.4f', '.4f']})
 fig_model_results.update_layout(
@@ -377,9 +377,9 @@ Report.markdown('''
 Report.header('Appendix', anchor='appendix')
 
 fig_cross_val = go.Figure(data=[go.Table(columnwidth = [100, 100, 200, 100],
-                                             header=dict(values=list(cross_val_results.columns)), 
-                                             cells=dict(values=[cross_val_results['Cluster'], cross_val_results['Cross-Val Iteration'], 
-                                                                cross_val_results['Best Parameters'], cross_val_results['Best Score']], 
+                                             header=dict(values=list(cross_val_results_df.columns)), 
+                                             cells=dict(values=[cross_val_results_df['Cluster'], cross_val_results_df['Cross-Val Iteration'], 
+                                                                cross_val_results_df['Best Parameters'], cross_val_results_df['Best Score']], 
                                                         align=['left', 'left', 'left', 'right']))])
 fig_cross_val.update_traces(cells={'format':[None, None, None, '.4f']})
 fig_cross_val.update_layout(
