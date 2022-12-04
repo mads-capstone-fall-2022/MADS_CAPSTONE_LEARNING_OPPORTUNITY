@@ -19,25 +19,6 @@ pio.templates['TLO'] = go.layout.Template(
 pio.templates.default = 'plotly+TLO'
 
 
-# # Create a connection object.
-# conn = connect()
-
-# # Perform SQL query on the Google Sheet.
-# # Uses st.cache to only rerun when the query changes or after 10 min.
-# @st.cache(ttl=600)
-# def run_query(query):
-#     rows = conn.execute(query, headers=1)
-#     rows = rows.fetchall()
-#     return rows
-
-# sheet_url = st.secrets["child_oppurtunity_input_file"] #st.secrets["seda_map_file"]
-# rows = run_query(f'SELECT * FROM "{sheet_url}"')
-
-
-# #print(type(rows))
-# #seda_map_df  = pd.DataFrame(list(rows))
-# child_opportunity_df = pd.DataFrame(list(rows))
-
 
 #### DATA LOADING ####
 @st.cache(ttl=6000)
@@ -300,6 +281,8 @@ fig_sp_clusters.update_yaxes(showgrid=False)
 
 Report.plotly_chart(fig_sp_clusters, sharing='streamlit')
 
+Report.markdown('''There are two caveats about our clustering results.  The above plot shows districts that were present in both the COI and SEDA data.  Since the state of New York did not submit scores for 2016-2018, any New York school districts are excluded.  Also, when the K-Means cluster model that we trained on the training data was applied to the held-out test set, we found that no new school districts were added to Cluster 3 (the large, metropolitan districts cluster).
+''')
 Report.markdown('''We created dashboard visualizations to represent these clusters of school districts across the US and represent the relative achievement scores. This allows dashboard users to more objectively compare achievement across school districts. 
 ''')
 Report.markdown('''# A year over year comparison would help track how scores are changing.  Are we doing this?
@@ -307,6 +290,9 @@ Report.markdown('''# A year over year comparison would help track how scores are
 
 
 Report.subheader('Prediction Results')
+Report.markdown('''The primary goal of our prediction activies was to indentify important features in the COI data - both at the nation level and across different clusters of school districts.  To accomplish this, we applied a variety of modeling methods with results summarized in the following table.  We used the $R^2$ (coefficient of determination) scoring method to evaluate the models.  The best score for this method is 1, with 0 representing a constant prediction of the average target value and negative scores being indefinitely worse. 
+''')
+
 Report.write(model_results_df)
 
 fig_rt_feat_imp = px.box(feature_imp_df, 
@@ -330,8 +316,6 @@ sp_coi_hist_1 = px.histogram(coi_hist_1,
                              width=1200,
                              height=500,
                              title='Important COI Feature Distributions')
-
-
 sp_coi_hist_2 = px.histogram(coi_hist_2, 
                              x='Value', 
                              color='Cluster Name', 
@@ -349,7 +333,7 @@ with st.container():
 
 
 Report.header('Discussion', anchor='discussion')
-Report.markdown(f'''Learning from other states' educational successes (ref EPI report)''')
+Report.markdown('''Learning from other states' educational successes (ref EPI report)''')
 
 
 Report.header('Statement of Work', anchor='statement_of_work')
