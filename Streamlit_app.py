@@ -156,7 +156,7 @@ group_labels = ['Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4']
 fig_dist = ff.create_distplot(
         hist_data, group_labels)
 
-fig_dist.update_layout(autosize=True,margin={"r":0,"t":1,"l":0,"b":0}, title="Distribution Plot-Selected Cluster Relative to Others")
+fig_dist.update_layout(autosize=True,margin={"r":0,"t":2,"l":0,"b":0}, title="Distribution Plot-Selected Cluster Relative to Others")
 # Plot
 dist_plot_visual.plotly_chart(fig_dist, use_container_width=True)
 
