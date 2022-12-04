@@ -32,14 +32,16 @@ def load_data():
     with open('Data/feature_imp.pkl', 'rb') as f:
         feature_imp_df = pickle.load(f)
 
+    with open('Data/clusters.pkl', 'rb') as f:
+        cluster_df = pickle.load(f)
+    
     model_results_df = pd.read_csv('Data/model_results.csv')
     cross_val_results_df = pd.read_csv('Data/cross_val_results.csv')
 
-    return coi_df, seda_df, feature_imp_df, model_results_df, cross_val_results_df
+    return coi_df, seda_df, feature_imp_df, cluster_df, model_results_df, cross_val_results_df
 
-coi_df, seda_df, feature_imp_df, model_results_df, cross_val_results_df = load_data()
+coi_df, seda_df, feature_imp_df, cluster_df, model_results_df, cross_val_results_df = load_data()
 
-cluster_df = coi_df.iloc[:, :]
 
 
 #### DASHBOARD SECTION ####
@@ -292,7 +294,22 @@ Report.subheader('Prediction Results')
 Report.markdown('''The primary goal of our prediction activies was to indentify important features in the COI data - both at the nation level and across different clusters of school districts.  To accomplish this, we applied a variety of modeling methods with results summarized in the following table.  We used the $R^2$ (coefficient of determination) scoring method to evaluate the models.  The best score for this method is 1, with 0 representing a constant prediction of the average target value and negative scores being indefinitely worse. 
 ''')
 
-Report.write(model_results_df)
+fig_model_results = go.Figure(data=[go.Table(columnwidth = [300, 300, 100, 100, 100],
+                                             header=dict(values=list(model_results.columns)), 
+                                             cells=dict(values=[model_results['Model'], model_results['Hyperparameters'], 
+                                                                model_results['Cluster'], model_results['Training Set Score'], 
+                                                                model_results['Test Set Score']], 
+                                                        align=['left', 'left', 'left', 'right', 'right']))])
+fig_model_results.update_traces(cells={'format':[None, None, None, '.4f', '.4f']})
+fig_model_results.update_layout(
+    height=600,
+    width=1000,
+    showlegend=False,
+    title_text='Predictive Model Results',
+)
+
+Report.plotly_chart(fig_model_results, sharing='streamlit')
+
 
 fig_rt_feat_imp = px.box(feature_imp_df, 
                          x='Variable', 
@@ -358,7 +375,20 @@ Report.markdown('''
 
 
 Report.header('Appendix', anchor='appendix')
-Report.write(cross_val_results_df)
+
+fig_cross_val = go.Figure(data=[go.Table(columnwidth = [100, 100, 200, 100],
+                                             header=dict(values=list(cross_val_results.columns)), 
+                                             cells=dict(values=[cross_val_results['Cluster'], cross_val_results['Cross-Val Iteration'], 
+                                                                cross_val_results['Best Parameters'], cross_val_results['Best Score']], 
+                                                        align=['left', 'left', 'left', 'right']))])
+fig_cross_val.update_traces(cells={'format':[None, None, None, '.4f']})
+fig_cross_val.update_layout(
+    height=900,
+    width=800,
+    showlegend=False,
+    title_text='Cross-Validation Grid Search Results',
+)
+Report.plotly_chart(fig_cross_val, sharing='streamlit')
 
 seda_df['residuals'] = seda_df['cs_mn_all'] - seda_df['predictions']
 
@@ -373,4 +403,4 @@ fig_resid = px.scatter(seda_df,
                        )
 fig_resid.update_xaxes(showgrid=False)
 fig_resid.update_yaxes(showgrid=False)
-Report.plotly_chart(fig_resid)
+Report.plotly_chart(fig_resid, sharing='streamlit')
