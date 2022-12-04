@@ -377,14 +377,18 @@ Report.markdown('''
 Report.header('Appendix', anchor='appendix')
 
 fig_cross_val = go.Figure(data=[go.Table(columnwidth = [100, 100, 200, 100],
-                                             header=dict(values=list(cross_val_results_df.columns)), 
+                                             header=dict(values=list(cross_val_results_df.columns), 
+                                                         fill_color='black', 
+                                                         font=dict(color='white', size=16)), 
                                              cells=dict(values=[cross_val_results_df['Cluster'], cross_val_results_df['Cross-Val Iteration'], 
                                                                 cross_val_results_df['Best Parameters'], cross_val_results_df['Best Score']], 
-                                                        align=['left', 'left', 'left', 'right']))])
+                                                        align=['left', 'left', 'left', 'right'], 
+                                                        fill_color='darkgrey', 
+                                                        font=dict(color='white', size=14)))])
 fig_cross_val.update_traces(cells={'format':[None, None, None, '.4f']})
 fig_cross_val.update_layout(
     height=900,
-    width=800,
+    width=900,
     showlegend=False,
     title_text='Cross-Validation Grid Search Results',
 )
