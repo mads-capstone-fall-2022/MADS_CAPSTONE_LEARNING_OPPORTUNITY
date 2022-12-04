@@ -39,7 +39,7 @@ def load_data():
 
 coi_df, seda_df, feature_imp_df, model_results_df, cross_val_results_df = load_data()
 
-cluster_df = coi_df.copy()
+cluster_df = coi_df.iloc[:, :]
 
 
 #### DASHBOARD SECTION ####
@@ -73,7 +73,7 @@ v_year_choice =  filter_col3.radio(
 #rename the sedalean name column
 seda_df = seda_df.rename(columns={"NAME_LEA15": "sedalea_name"})
 #convert the data types for the field year(year)
-seda_df.loc['seda_year'] = pd.to_datetime(seda_df.loc[:,'seda_year'], format='%Y')
+seda_df.loc[:, 'seda_year'] = pd.to_datetime(seda_df.loc[:, 'seda_year'], format='%Y')
 
 
 
@@ -87,10 +87,10 @@ st.text(" ")
 
 # filter the dataframes
 if v_segment == 'All Clusters':
-    seda_disp_df = seda_df.copy()
+    seda_disp_df = seda_df.iloc[:, :]
     seda_disp_df = seda_disp_df[(seda_disp_df['seda_year']==v_year_choice) & (seda_disp_df['subject']==v_subject)]
 
-    feature_imp_disp_df = feature_imp_df.copy()
+    feature_imp_disp_df = feature_imp_df.iloc[:, :]
 
 else:
     seda_disp_df = seda_df[(seda_df['Cluster Name']==v_segment) & (seda_df['seda_year']==v_year_choice) & (seda_df['subject']==v_subject)]
@@ -102,7 +102,6 @@ map_visual_col , dist_plot_visual = Dashboard.columns(2)
 
 seda_disp_df['sign'] =  np.where(seda_disp_df['cs_mn_all'] >= 0, 'Positive', 'Negative')
 seda_disp_df['cs_mn_all_abs'] = np.abs(seda_disp_df['cs_mn_all'])
-seda_disp_df.loc[:,'cs_mn_all_abs'] = seda_disp_df['cs_mn_all_abs'].astype(str).astype(float)
 
 
 #create the map configuration
