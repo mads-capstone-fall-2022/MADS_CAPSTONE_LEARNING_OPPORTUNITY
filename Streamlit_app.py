@@ -74,7 +74,7 @@ v_year_choice =  filter_col3.radio(
 seda_df = seda_df.rename(columns={"NAME_LEA15": "sedalea_name"})
 #convert the data types for the field year(year)
 seda_df.loc[:, 'seda_year'] = pd.to_datetime(seda_df.loc[:, 'seda_year'], format='%Y')
-print(seda_df[seda_df.loc['seda_year']==2016].shape)
+print(seda_df[seda_df['seda_year']==2016].shape)
 
 
 #added some space after the first line of controls on the streamlit app screen
