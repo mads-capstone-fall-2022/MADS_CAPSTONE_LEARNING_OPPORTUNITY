@@ -223,7 +223,7 @@ fig_bp_feat_imp = px.box(feature_imp_disp_df,
                         # height=800, 
                         # width=1200, 
                          title='Model Feature Importance')
-fig_bp_feat_imp.update_layout( autosize=True)
+#fig_bp_feat_imp.update_layout( autosize=True)
 Dashboard.plotly_chart(fig_bp_feat_imp, use_container_width=True)
 
 
