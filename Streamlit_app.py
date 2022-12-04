@@ -71,9 +71,15 @@ v_segment = filter_col1.selectbox(
      'Which cluster would you like to select',
      ('All Clusters', 'Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4'))
 
+st.text(" ")
+st.text(" ")
+
 v_subject = filter_col2.selectbox(
      'Which subject would you like to select',
      ('Math', 'Reading'))
+
+st.text(" ")
+st.text(" ")
 
 v_year_choice =  filter_col3.radio(
     "Select a Year",
