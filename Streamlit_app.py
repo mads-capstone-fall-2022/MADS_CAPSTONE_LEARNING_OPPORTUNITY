@@ -150,6 +150,7 @@ hist_coi_names = ['School Poverty', '3rd Grade Math Proficiency', '3rd Grade Rea
                   'Single-Headed Households', 'Health Insurance Coverage', 'Airborne Microparticles', 'Industrial Pollutants']
 hist_coi_labels = {hist_coi_cols[i]: hist_coi_names[i] for i in range(len(hist_coi_names))}
 
+st.text(coi_df.columns)
 hist_coi = coi_df.melt(id_vars=['LEAID', 'NAME_LEA15', 'Cluster Name'], value_vars=hist_coi_cols, var_name='COI Variable', value_name='Value').reset_index()
 hist_coi['COI Variable'] = hist_coi['COI Variable'].replace(hist_coi_labels)
 
