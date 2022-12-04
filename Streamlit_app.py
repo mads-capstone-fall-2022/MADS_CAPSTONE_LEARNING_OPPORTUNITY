@@ -185,14 +185,13 @@ col1, col2, col3, col4 = Dashboard.columns(4)
 #compute the percentage of schools with positive and negative scores
 v_negative_score_percentage = round((v_negative_score_count / (v_negative_score_count + v_positive_score_count))*100 , 2)
 v_positive_score_percentage = round((v_positive_score_count / (v_negative_score_count + v_positive_score_count))*100 , 2)
-#v_negative_score_percentage = "{0:.0%}".format(v_negative_score_percentage)
-#v_positive_score_percentage = "{0:.0%}".format(v_positive_score_percentage)
+
 
 #display the controls
 col1.metric(label="Number of States", value= v_distinct_states , help="The number of States the School districts in the above selection fall in")
 col2.metric(label="Number of School Districts", value=v_distinct_school_districts, help="Number of School districts in the filter selection above")
 col3.metric(label="Number of Negative Scores", value=v_negative_score_count, delta='-'+str(v_negative_score_percentage)+'%', help="Number of School districts with negative scores relative to the mean 4th grade score")
-col4.metric(label="Number of Positive Scores", value=v_positive_score_count, delta=v_positive_score_percentage, help="Number of School districts with positive scores relative to the mean 4th grade score")
+col4.metric(label="Number of Positive Scores", value=v_positive_score_count, delta=str(v_positive_score_percentage)+'%', help="Number of School districts with positive scores relative to the mean 4th grade score")
 
 
 #st.set_page_config(layout="wide")
