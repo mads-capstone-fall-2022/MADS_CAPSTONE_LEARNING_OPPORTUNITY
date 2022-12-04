@@ -295,12 +295,16 @@ Report.markdown('''The primary goal of our prediction activies was to indentify 
 ''')
 
 fig_model_results = go.Figure(data=[go.Table(columnwidth = [300, 300, 100, 100, 100],
-                                             header=dict(values=list(model_results_df.columns)), 
+                                             header=dict(values=list(model_results_df.columns),
+                                                         fill_color='black', 
+                                                         font=dict(color='white', size=16)), 
                                              cells=dict(values=[model_results_df['Model'], model_results_df['Hyperparameters'], 
                                                                 model_results_df['Cluster'], model_results_df['Training Set Score'], 
                                                                 model_results_df['Test Set Score']], 
-                                                        align=['left', 'left', 'left', 'right', 'right']))])
-fig_model_results.update_traces(cells={'format':[None, None, None, '.4f', '.4f']})
+                                                        align=['left', 'left', 'left', 'right', 'right'],                                                        fill_color='white', 
+                                                        line_color='grey',
+                                                        font=dict(color='black', size=14),
+                                                        format=[None, None, None, '.4f', '.4f']))])
 fig_model_results.update_layout(
     height=600,
     width=1000,
