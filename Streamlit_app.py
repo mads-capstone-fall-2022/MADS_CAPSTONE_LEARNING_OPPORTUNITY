@@ -127,7 +127,7 @@ seda_disp_df.loc[:,'cs_mn_all_abs'] = seda_disp_df['cs_mn_all_abs'].astype(str).
 #create the map configuration
 fig_map = px.scatter_mapbox(data_frame=seda_disp_df,lat='latitude', lon='longitude', color='sign',color_discrete_sequence=px.colors.qualitative.G10,
                         zoom = 2,size='cs_mn_all_abs' ,text='sedalea_name', color_discrete_map = {'Negative': '#AB63FA', 'Positive':'#FECB52'})
-fig_map.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+#fig_map.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 #fig = px.scatter_mapbox(data_frame=child_oppurtunity_index_data_df, lat='latitude', lon='longitude', color='sign', text='sedaleaname', hover_name='subject', size='cs_mn_all_abs')
 
 fig_map.update_layout(mapbox_style="open-street-map", autosize=True)
@@ -156,7 +156,7 @@ group_labels = ['Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4']
 fig_dist = ff.create_distplot(
         hist_data, group_labels)
 
-fig_dist.update_layout(autosize=True,margin={"r":0,"t":2,"l":0,"b":0}, title="Distribution Plot-Selected Cluster Relative to Others")
+fig_dist.update_layout(autosize=True, title="Distribution Plot-Selected Cluster Relative to Others")
 # Plot
 dist_plot_visual.plotly_chart(fig_dist, use_container_width=True)
 
