@@ -90,7 +90,8 @@ seda_df.loc['seda_year'] = pd.to_datetime(seda_df.loc[:,'seda_year'], format='%Y
 
 
 
-
+#added some space after the first line of controls on the streamlit app screen
+st.markdown('##')
 
 
 
