@@ -93,7 +93,7 @@ if v_segment == 'All Clusters':
     feature_imp_disp_df = feature_imp_df.iloc[:, :]
 
 else:
-    seda_disp_df = seda_df[(seda_df['Cluster Name']==v_segment) & (seda_df['seda_year'].dt.strftime('%Y')==v_year_choice) & (seda_df['subject']==v_subject)]
+    seda_disp_df = seda_df[(seda_df['Cluster Name']==v_segment) & (seda_df['seda_year']==v_year_choice) & (seda_df['subject']==v_subject)]
     
     feature_imp_disp_df = feature_imp_df[feature_imp_df['Cluster Name']==v_segment]
 
