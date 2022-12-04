@@ -159,8 +159,6 @@ coi_hist_2 = hist_coi[hist_coi['COI Variable'].isin(hist_coi_names[4:])]
 
 
 
-
-
 #get summary stats
 #get the count of distinct states the school districts are in
 v_distinct_states  = seda_disp_df.stateabb.nunique()
