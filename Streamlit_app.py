@@ -383,9 +383,10 @@ fig_cross_val = go.Figure(data=[go.Table(columnwidth = [100, 100, 200, 100],
                                              cells=dict(values=[cross_val_results_df['Cluster'], cross_val_results_df['Cross-Val Iteration'], 
                                                                 cross_val_results_df['Best Parameters'], cross_val_results_df['Best Score']], 
                                                         align=['left', 'left', 'left', 'right'], 
-                                                        fill_color='darkgrey', 
-                                                        font=dict(color='white', size=14)))])
-fig_cross_val.update_traces(cells={'format':[None, None, None, '.4f']})
+                                                        fill_color='white', 
+                                                        line_color='grey',
+                                                        font=dict(color='black', size=14),
+                                                        format=[None, None, None, '.4f']))])
 fig_cross_val.update_layout(
     height=900,
     width=900,
