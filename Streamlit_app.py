@@ -183,8 +183,8 @@ v_positive_score_count = seda_disp_df[seda_disp_df['cs_mn_all'].ge(0)]['cs_mn_al
 
 col1, col2, col3, col4 = Dashboard.columns(4)
 #compute the percentage of schools with positive and negative scores
-v_negative_score_percentage = round((v_negative_score_count / (v_negative_score_count + v_positive_score_count))/100 , 2)
-v_positive_score_percentage = round((v_positive_score_count / (v_negative_score_count + v_positive_score_count))/100 , 2)
+v_negative_score_percentage = round((v_negative_score_count / (v_negative_score_count + v_positive_score_count))*100 , 2)
+v_positive_score_percentage = round((v_positive_score_count / (v_negative_score_count + v_positive_score_count))*100 , 2)
 
 #display the controls
 col1.metric(label="Number of States", value= v_distinct_states , help="The number of States the School districts in the above selection fall in")
