@@ -220,11 +220,11 @@ fig_bp_feat_imp = px.box(feature_imp_disp_df,
                          x='Variable', 
                          y='Importance', 
                          color='Cluster Name', 
-                         height=800, 
-                         width=1200, 
+                        # height=800, 
+                        # width=1200, 
                          title='Model Feature Importance')
-
-Dashboard.plotly_chart(fig_bp_feat_imp)
+fig_bp_feat_imp.update_layout( autosize=True)
+Dashboard.plotly_chart(fig_bp_feat_imp, use_container_width=True)
 
 
 
