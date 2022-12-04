@@ -102,6 +102,8 @@ map_visual_col , dist_plot_visual = Dashboard.columns(2)
 
 seda_disp_df['sign'] =  np.where(seda_disp_df['cs_mn_all'] >= 0, 'Positive', 'Negative')
 seda_disp_df['cs_mn_all_abs'] = np.abs(seda_disp_df['cs_mn_all'])
+st.text(seda_df.dtypes)
+st.text(seda_disp_df.dtypes)
 
 
 #create the map configuration
