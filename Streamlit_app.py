@@ -77,7 +77,7 @@ v_subject = filter_col2.selectbox(
 
 v_year_choice =  filter_col3.radio(
     "Select a Year",
-    (2016, 2017, 2018))
+    (2016, 2017, 2018), horizontal =True)
 
 #filter_col1.slider(
    # 'Year:', min_value=2016, max_value=2018, step=1, value=2016)
