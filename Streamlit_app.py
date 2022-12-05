@@ -366,9 +366,9 @@ sp_coi_hist_2 = px.histogram(coi_hist_2,
                              nbins=100,
                              width=1200,
                              height=500)
-sp_coi_hist_1.update_layout(
+sp_coi_hist_2.update_layout(
     autosize=False,
-    margin_t=0
+    margin_t=5
 )
 
 with st.container():
