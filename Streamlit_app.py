@@ -289,7 +289,7 @@ Report.markdown('''# A year over year comparison would help track how scores are
 
 
 Report.subheader('Prediction Results')
-Report.markdown('''The primary goal of our prediction activies was to indentify important features in the COI data - both at the nation level and across different clusters of school districts.  To accomplish this, we applied a variety of modeling methods with results summarized in the following table.  We used the $R^2$ (coefficient of determination) scoring method to evaluate the models.  The best score for this method is 1, with 0 representing a constant prediction of the average target value and negative scores being indefinitely worse. 
+Report.markdown('''The primary goal of our prediction activities was to identify important features in the COI data - both at the nation level and across different clusters of school districts.  To accomplish this, we applied a variety of modeling methods from the scikit-learn package (Pedregosa et al., 2011).  The results are summarized in the following table.  We used the $R^2$ (coefficient of determination) scoring method to evaluate the models.  The best score for this method is 1, with 0 representing a constant prediction of the average target value and negative scores being indefinitely worse.
 ''')
 
 fig_model_results = go.Figure(data=[go.Table(columnwidth = [300, 300, 100, 100, 100],
@@ -313,6 +313,16 @@ fig_model_results.update_layout(
 
 Report.plotly_chart(fig_model_results, sharing='streamlit')
 
+Report.markdown('''Overall, the histogram-based gradient boosting tree regression method produced a similar score on the training set to the more common, non-histogram gradient boosting regression, but performed much better, efficiency-wise, on over 150,000 rows of training data.  This better performance allowed us to do a grid search with cross-validation of learning rate and maximum depth parameters, leading to an improved score on random subsets of the training data.  Cross-validation result details are in the Appendix.
+''')
+Report.markdown('''Once we decided on the histogram-based gradient boosting tree regressor method, we trained models both on all the training data at once, and also as separate models for each cluster.  Grid search resulted in different hyperparameters for the cluster models.  
+The clusters also had widely varying $R^2$ scores on the training data and the test set.  The overall model was moderately successful and had correct looking residuals (plot in Appendix), but the cluster 1 performed much worse.  
+''')
+Report.markdown('''To further investigate our model performance, we looked at feature importance for each model and examined the cluster characteristics for those features.  We chose to use permutation feature importance, which is a method that rotates through features, removing each in turn from the model.  The calculated importance is the decrease in the $R^2$ score with the feature removed.  The below interactive box plot shows the top 5 features for each model.
+''')
+Report.markdown('''An outlier in this plot is Cluster 3's top feature, child population.  Cluster 3 is the large-district cluster, which only consists of 3 districts once linked to the SEDA data, because the state of New York did not submit scores for 2016-2018.  Removing that outlier by clicking the legend item for Cluster 3 makes the rest of the importances more easily visible.
+''')
+
 
 fig_rt_feat_imp = px.box(feature_imp_df, 
                          x='Variable', 
@@ -324,6 +334,11 @@ fig_rt_feat_imp = px.box(feature_imp_df,
 
 Report.plotly_chart(fig_rt_feat_imp, use_container_width=True, sharing='streamlit')
 
+
+Report.markdown('''Most of the features were from the COI indicators, with the exception of the SEDA variables **Grade**, **School Year**, **Subject (Read/Math)** and the calculated **Cluster ID**.  There was substantial overlap in the feature lists between models.  We expected the **3rd Grade Reading** and **3rd Grade Math** features to be important, since it makes intuitive sense that 3rd grade scores would impact later grade level scores.  The importance of these features helps show that the models reflect real impactful characteristics.  The **School Poverty** feature in particular was highly important in 4 out of 5 models.  This aligns with other studies of school performance that find that poverty levels are greatly predictive of success relative to other schools (Semuels, 2016).
+''')
+Report.markdown('''The below set of histograms shows the distributions of the top 8 COI factors.  In many of these plots, Cluster 1 is roughly in the center, with Cluster 2 and Cluster 4 tending toward opposite sides.  For example, on the **School Poverty** indicator, Cluster 2's distribution peaks in the negative numbers, versus Cluster 4's peak in the positive numbers.  This means that more districts in Cluster 2 have low poverty levels, where Cluster 4 has more districts with higher poverty levels.  From this, and based on the importance of this factor in the overall model, we expect that there will be noticeable differences in the scores between these two clusters.  Exploring from the dashboard, it can be seen that Cluster 2 has more scores below the national average and Cluster 4 has more scores above the national average.  Cluster 1 shows a middle level of poor districts and also a balanced number of above-average and below-average scores.   From this, it appears that lower poverty levels correlate with higher scores and higher poverty levels with lower scores.
+''')
 
 sp_coi_hist_1 = px.histogram(coi_hist_1, 
                              x='Value', 
@@ -350,9 +365,27 @@ with st.container():
     Report.plotly_chart(sp_coi_hist_2, use_container_width=True, sharing='streamlit')
 
 
+Report.markdown('''The features in the above distributions can be divided into two groups: positive factors and negative factors.  The pattern between clusters 1, 2, and 4 are consistent.  For positive factors - 3rd grade scores, health insurance coverage - Cluster 2 (higher scoring) shows higher values and Cluster 4 (lower scores) shows lower values.  For negative factors - poverty, pollution - the opposite is true.  In each case, Cluster 1 is roughly in the middle.
+''')
+
 
 Report.header('Discussion', anchor='discussion')
-Report.markdown('''Learning from other states' educational successes (ref EPI report)''')
+Report.markdown('''A report from the Economic Policy Institute argued that the US can best learn how to improve public schools by looking to other states that are more successful, rather than by comparing US schools with other countries (Carnoy & Khavenson, 2015).  Their argument was that other industrialized countries can have very different qualities from the US, such as nationally-run schools, instead of state-run, or more homogenous populations, compared to the diversity of the US population.  However, comparing achievement levels across states is complicated, due to differing tests.  In addition, comparing at the state level makes it difficult to get detailed information, since there are many school districts with varying performance in each state.  Local differences in school funding and other characteristics can be substantial (Semuels, 2016).  Therefore, to really get detailed, informative comparisons, we believe that the school district level is best. 
+''')
+Report.markdown('''We chose the Child Opportunity Index (COI) as the basis for our school district clusters and our predictive models because its factors provide a holistic view of a community's resources for children, not simply economic factors.  We found that, while poverty was a highly important feature in our models, other non-economic features - such as pollution - were also impactful.  We chose the Stanford Educational Data Archive (SEDA) mean reading and math scores as our target variable for prediction because we wanted to be able to compare school districts across state lines, which is difficult due to different tests being used in each state.  The Stanford project baselined those state-specific scores into ones on the same, national scale.
+''')
+Report.markdown('''Our goals for our analysis of these datasets were:
+- To identify a small number of school district clusters with distinct characteristics based on the Child Opportunity Index data
+- To identify important features in models predicting the school district's mean achievement score based on the COI data for all clusters and also individual clusters
+''')
+Report.markdown('''In our analysis, we found 4 clusters.  One of them was essentially a cluster of outliers - extremely large urban school districts.  The other three clusters divided the remaining districts roughly in thirds.   When we examined permutation feature importance for histogram-based gradient boosting tree regression models trained either on all clusters together or on individual clusters, we found correlations between the distributions of important features and the amount of districts reporting above- or below-average scores.  For the **School Poverty** feature, the pattern was especially clear, with higher levels of poverty correlating to more districts reporting low mean scores. 
+''')
+Report.markdown('''The dashboard we created based on this analysis can be used by parents and school administrators to identify districts that are doing well or poorly compared to others with other districts that have similar characteristics.  This information can be used to support improvements in school achievement by providing fairer comparisons between districts. 
+''')
+Report.markdown('''This project had several limitations, one of which was due to an ethical concern with the SEDA data.  While individual school-level data is available from SEDA, some of the values are obscured due to privacy concerns, particularly if the school has a small population of an ethnic minority children.  To avoid this issue, we used data from the district level, which was not obscured.  Another limitation was choosing to predict just one of the many possible outcome variables in the SEDA data (overall mean score).
+''')
+Report.markdown('''An interesting opportunity for future work is to include US Census data on gender, race, and ethnicity and use those factors in concert with the COI data to predict scores for sub-groups and gaps between sub-group scores.  SEDA calculated gaps, for example, for girls versus boys and white versus hispanic sub-populations.  Additionally, SEDA has just released new data for 2019-2021.  This data could be explored to understand COVID impacts on achievement scores by using the 2015 COI data and 2016-2018 SEDA data to create time-series predictions of scores and comparing them with the newly-released actual scores for 2019-21.
+''')
 
 
 Report.header('Statement of Work', anchor='statement_of_work')
