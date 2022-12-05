@@ -426,9 +426,11 @@ fig_cross_val = go.Figure(data=[go.Table(columnwidth = [100, 100, 200, 100],
                                                         font=dict(color='white', size=14),
                                                         format=[None, None, None, '.4f']))])
 fig_cross_val.update_layout(
-    # height=900,
-    # width=900,
-    # showlegend=False,
+    autosize=False,
+    margin_b=0,
+    height=900,
+    width=900,
+    showlegend=False,
     title_text='Cross-Validation Grid Search Results',
 )
 Report.plotly_chart(fig_cross_val, sharing='streamlit')
