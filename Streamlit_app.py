@@ -307,7 +307,7 @@ fig_model_results = go.Figure(data=[go.Table(columnwidth = [300, 300, 100, 100, 
 fig_model_results.update_layout(
     autosize=False,
     margin_b=0,
-    height=500,
+    height=400,
     width=1000,
     showlegend=False,
     title_text='Predictive Model Results',
