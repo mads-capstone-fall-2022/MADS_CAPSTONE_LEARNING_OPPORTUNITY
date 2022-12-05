@@ -284,8 +284,6 @@ Report.markdown('''There is a caveat about our clustering results.  When the tra
 ''')
 Report.markdown('''We created dashboard visualizations to represent these clusters of school districts across the US and represent the relative achievement scores. This allows dashboard users to more objectively compare achievement across school districts. 
 ''')
-Report.markdown('''# A year over year comparison would help track how scores are changing.  Are we doing this?
-''')
 
 
 Report.subheader('Prediction Results')
@@ -408,6 +406,7 @@ Report.markdown('''
 <p style="padding-left: 2em; text-indent: -2em;">Fahle, E. M., Chavez, B., Kalogrides, D., Shear, B. R., Reardon, S. F., & Ho, A. D. (2021). <em>Stanford Education Data Archive: Technical Documentation (Version 4.1).</em> <a href="http://purl.stanford.edu/db586ns4974">http://purl.stanford.edu/db586ns4974</a></p>
 <p style="padding-left: 2em; text-indent: -2em;">GreatSchools.org. (n.d.) <em>GreatSchools ratings methodology report.</em>  Retrieved November 6, 2022 from <a href="https://www.greatschools.org/gk/ratings-methodology">https://www.greatschools.org/gk/ratings-methodology</a></p>
 <p style="padding-left: 2em; text-indent: -2em;">Klein, A. (2015, April 10). No Child Left Behind: An overview. <em>Education Week.</em> <a href="https://www.edweek.org/policy-politics/no-child-left-behind-an-overview/2015/04">https://www.edweek.org/policy-politics/no-child-left-behind-an-overview/2015/04</a></p>
+<p style="padding-left: 2em; text-indent: -2em;">National Center for Education Statistics. (2021). <em>School district boundaries.</em> [Data set]. <a href="https://nces.ed.gov/programs/edge/Geographic/DistrictBoundaries">https://nces.ed.gov/programs/edge/Geographic/DistrictBoundaries</a></p>
 <p style="padding-left: 2em; text-indent: -2em;">National Center for Education Statistics. (2015). <em>School district geographic relationship files.</em> [Data set]. <a href="https://nces.ed.gov/programs/edge/Geographic/RelationshipFiles">https://nces.ed.gov/programs/edge/Geographic/RelationshipFiles</a></p>
 <p style="padding-left: 2em; text-indent: -2em;">Noelke, C., McArdle, N., Baek, M., Huntington, N., Huber, R., Hardy, E., & Acevedo-Garcia, D. (2020). <em>Child Opportunity Index 2.0 Technical Documentation.</em> <a href="http://diversitydatakids.org/research-library/research-brief/how-we-built-it">http://diversitydatakids.org/research-library/research-brief/how-we-built-it</a></p>
 <p style="padding-left: 2em; text-indent: -2em;">Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., Blondel, M., Prettenhofer, P., Weiss, R., Dubourg, V., Vanderplas, J., Passos, A., Cournapeau, D., Brucher, M., Perrot, M., & Duchesnay, É. (2011). Scikit-learn: Machine learning in Python. <em>Journal of Machine Learning Research</em>, <em>12</em>(85), 2825–2830. <a href="http://jmlr.org/papers/v12/pedregosa11a.html">http://jmlr.org/papers/v12/pedregosa11a.html</a></p>
@@ -418,6 +417,18 @@ Report.markdown('''
 
 
 Report.header('Appendix', anchor='appendix')
+Report.subheader('Auxiliary Data Sources')
+Report.markdown('''In addition to our 2 main data sources, we also used 3 auxiliary datasets, which are listed in the references and also called out here.  
+1. US Census tract-level total population - Used to scale the population for each tract to get an estimate of the population in the school district.
+2. School district geographic relationship files - Used to link census tracts to school districts.  Districts may have multiple tracts within them, and tracts may belong to multiple districts.  As described above in the Data Cleaning section, we used these relationship files and the total population both to establish the relationships and to create a weighted average for the whole school district.  
+3. School district shape files - Used to get latitude and longitude for each school district for plotting on a map on the dashboard.
+''')
+
+
+
+Report.subheader('Additional Visualizations')
+Report.markdown('''The following table lists the 5-fold cross-validation grid search results for each of the selected models.  The grid search was performed with learning rates (0.05, 0.1, 0.5, 1, 1.5, 2) and maximum depths (1, 2, 3, 4, 5).  The most frequently returned parameters were used for the final overall and cluster-based models.  If there was a tie for parameters, the one with the best score was used.  The scoring method here is $R^2$.
+''')
 
 fig_cross_val = go.Figure(data=[go.Table(columnwidth = [100, 100, 200, 100],
                                              header=dict(values=list(cross_val_results_df.columns), 
@@ -439,6 +450,10 @@ fig_cross_val.update_layout(
     title_text='Cross-Validation Grid Search Results',
 )
 Report.plotly_chart(fig_cross_val, sharing='streamlit')
+
+
+Report.markdown('''The below plot shows the residuals for the final all-cluster model.  The residuals are  shaped as would be expected from a good model.  They cluster in a roughly circular shape around zero.  They also lack signs of bias, heteroscedasticity, or non-linearity, any of which would indicate a systemic issue with the model.
+''')
 
 seda_df['residuals'] = seda_df['cs_mn_all'] - seda_df['predictions']
 
