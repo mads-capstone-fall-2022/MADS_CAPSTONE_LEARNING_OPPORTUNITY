@@ -428,7 +428,7 @@ fig_cross_val = go.Figure(data=[go.Table(columnwidth = [100, 100, 200, 100],
 fig_cross_val.update_layout(
     autosize=False,
     margin_b=0,
-    height=900,
+    height=700,
     width=900,
     showlegend=False,
     title_text='Cross-Validation Grid Search Results',
