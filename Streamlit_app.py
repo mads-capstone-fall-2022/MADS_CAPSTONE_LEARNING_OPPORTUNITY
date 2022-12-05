@@ -352,6 +352,11 @@ sp_coi_hist_1 = px.histogram(coi_hist_1,
                              width=1200,
                              height=500,
                              title='Important COI Feature Distributions')
+sp_coi_hist_1.update_layout(
+    autosize=False,
+    margin_b=0
+)
+
 sp_coi_hist_2 = px.histogram(coi_hist_2, 
                              x='Value', 
                              color='Cluster Name', 
@@ -361,6 +366,10 @@ sp_coi_hist_2 = px.histogram(coi_hist_2,
                              nbins=100,
                              width=1200,
                              height=500)
+sp_coi_hist_2.update_layout(
+    autosize=False,
+    margin_b=0
+)
 
 with st.container():
     Report.plotly_chart(sp_coi_hist_1, use_container_width=True, sharing='streamlit')
