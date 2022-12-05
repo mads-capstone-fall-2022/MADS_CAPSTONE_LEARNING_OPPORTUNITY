@@ -305,6 +305,7 @@ fig_model_results = go.Figure(data=[go.Table(columnwidth = [300, 300, 100, 100, 
                                                         font=dict(color='white', size=14),
                                                         format=[None, None, None, '.4f', '.4f']))])
 fig_model_results.update_layout(
+    autosize=False,
     height=500,
     width=1000,
     showlegend=False,
