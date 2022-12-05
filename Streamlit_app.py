@@ -331,7 +331,10 @@ fig_rt_feat_imp = px.box(feature_imp_df,
                          height=800, 
                          width=1200, 
                          title='Model Feature Importance')
-
+fig_rt_feat_imp.update_layout(
+    xaxis_title=None,
+    yaxis_title='Feature Importance',
+)
 Report.plotly_chart(fig_rt_feat_imp, use_container_width=True, sharing='streamlit')
 
 
