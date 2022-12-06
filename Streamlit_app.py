@@ -289,7 +289,7 @@ Report.markdown('''We created dashboard visualizations to represent these cluste
 
 
 Report.subheader('Prediction Results')
-Report.markdown('''The primary goal of our prediction activities was to identify important features in the COI data - both at the nation level and across different clusters of school districts.  To accomplish this, we applied a variety of modeling methods from the scikit-learn package (Pedregosa et al., 2011).  The results are summarized in the following table.  We used the $R^2$ (coefficient of determination) scoring method to evaluate the models.  The best score for this method is 1, with 0 representing a constant prediction of the average target value and negative scores being indefinitely worse.
+Report.markdown('''The primary goal of our prediction activities was to identify important features in the COI data - both at the nation level and across different clusters of school districts.  To accomplish this, we applied a variety of modeling methods from the scikit-learn package.  The results are summarized in the following table.  We used the $R^2$ (coefficient of determination) scoring method to evaluate the models.  The best score for this method is 1, with 0 representing a constant prediction of the average target value and negative scores being indefinitely worse.
 ''')
 
 fig_model_results = go.Figure(data=[go.Table(columnwidth = [300, 300, 100, 100, 100],
