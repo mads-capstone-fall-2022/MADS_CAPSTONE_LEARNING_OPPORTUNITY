@@ -1,4 +1,6 @@
-# MADS Capstone Fall 2022 - Team Learning Opportunity
+# Evaluating US School District Achievement Scores Based on Community Resource Levels
+## MADS Capstone Fall 2022 - Team Learning Opportunity
+
 This project was completed for the Capstone course of the Master of Applied Data Science program at the University of Michigan's School of Information by Katie Andrews and Jayachandra Korrapati. 
 
 The code in this repository will allow you to reproduce our analysis of 2 datasets:
