@@ -8,7 +8,7 @@ The code in this repository will allow you to reproduce our analysis of 2 datase
 We analyzed these datasets to explore US school district comparison by clustering school districts based on the COI factors, then by using the COI data to predict SEDA achievement scores for grade school reading and math.  
 
 ## Streamlit App
-The results of our analysis are available in our [Streamlit cloud app](https://child-opportunity-mads.streamlit.app/)
+The results of our analysis are available in our Streamlit app: [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://child-opportunity-mads.streamlit.app)
 
 ## Reproducing Our Results
 In order to run these notebooks, particularly the ones using SEDA data, we used the University of Michigan's Advanced Research Computing resources.  Please be aware that you might not be able to run all the notebooks on a local system. 
