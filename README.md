@@ -43,10 +43,12 @@ Once downloaded, unzip the school district boundary file and place the `.shp` fi
 
 ### Running the Notebooks
 As several of the notebooks require outputs from earlier notebooks, they should be run in this order:
-1. coi_data_cleaning - Establishes the train/test split of COI data, consolidates the COI data from census tracts into school districts, outputs train/test split keys for use with SEDA data and the split COI data
-2. COI Kmeans clustering - 
-3. COI DBSCAN clustering - 
-4. seda_data_cleaning - Uses train/test split keys from coi_data_cleaning to split SEDA data and filter it to use only 2016-2018 data
-5. model_training - Uses the train/test split COI and SEDA data and the learnings from the clustering notebooks to create a K-Means cluster model of the COI data, trains a variety of predictive models on the COI data to predict the overall mean scores from the SEDA data
-6. display_items - Uses the data outputs of model_training to reproduce the figures and tables used in our Streamlit app
+
+1. coi_data_cleaning     - Establishes the train/test split of COI data, consolidates the COI data from census tracts into school districts, outputs train/test 			   split keys for use with SEDA data and the split COI data
+2. COI Kmeans clustering - This notebook has code which uses Kmeans clustering to cluster school districts from the COI information.
+3. COI DBSCAN clustering - This notebook has code which uses DBSCAN clustering to cluster school districts from the COI information. We used the results of Kmeans 
+			   clustering eventually, so this notebook is more for reference.
+4. seda_data_cleaning    - Uses train/test split keys from coi_data_cleaning to split SEDA data and filter it to use only 2016-2018 data
+5. model_training        - Uses the train/test split COI and SEDA data and the learnings from the clustering notebooks to create a K-Means cluster model of the COI 			       data,trains a variety of predictive models on the COI data to predict the overall mean scores from the SEDA data
+6. display_items 	 - Uses the data outputs of model_training to reproduce the figures and tables used in our Streamlit app
 
