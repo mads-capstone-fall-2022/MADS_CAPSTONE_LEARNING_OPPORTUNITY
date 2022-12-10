@@ -13,7 +13,7 @@ We analyzed these datasets to explore US school district comparison by clusterin
 The results of our analysis are available in our Streamlit app: [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://child-opportunity-mads.streamlit.app)
 
 ## Reproducing Our Results
-In order to run these notebooks, particularly the ones using SEDA data, we used the University of Michigan's Advanced Research Computing resources.  Please be aware that you might not be able to run all the notebooks on a local system. 
+In order to run these notebooks, particularly the ones using SEDA data, we used the University of Michigan's Advanced Research Computing resources.  Please be aware that you might not be able to run all the notebooks on a local system.  Also, the model_training notebook has a parametere in the first cell: n_jobs.  This is used by several models in the notebook and should be set to the number of cores you have available for multi-threaded jobs.
 
 ### Cloning the Repository
 
