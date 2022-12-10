@@ -173,7 +173,7 @@ if check_password():
     fig_dist = ff.create_distplot(
             hist_data, group_labels)
 
-    fig_dist.update_layout(autosize=True, title="Distribution Plot-Selected Cluster Relative to Others")
+    fig_dist.update_layout(autosize=True, title="Distribution Plot-Selected Cluster Relative to Others",legend={'traceorder':'normal'})
     # Plot
     dist_plot_visual.plotly_chart(fig_dist, use_container_width=True)
 
