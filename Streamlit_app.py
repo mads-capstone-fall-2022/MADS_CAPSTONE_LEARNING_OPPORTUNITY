@@ -418,8 +418,10 @@ if check_password():
     Report.markdown('''We chose the Child Opportunity Index (COI) as the basis for our school district clusters and our predictive models because its factors provide a holistic view of a community's resources for children, not simply economic factors.  We found that, while poverty was a highly important feature in our models, other non-economic features – such as pollution – were also impactful.  We chose the Stanford Educational Data Archive (SEDA) mean reading and math scores as our target variable for prediction because we wanted to be able to compare school districts across state lines, which is difficult due to different tests being used in each state.  The Stanford project baselined those state-specific scores into ones on the same, national scale.
     ''')
     Report.markdown('''Our goals for our analysis of these datasets were:
-    - To identify a small number of school district clusters with distinct characteristics based on the Child Opportunity Index data
-    - To identify important features in models predicting the school district's mean achievement score based on the COI data for all clusters and also individual clusters
+    ''')
+    Report.markdown('''- To identify a small number of school district clusters with distinct characteristics based on the Child Opportunity Index data
+    ''')
+    Report.markdown('''- To identify important features in models predicting the school district's mean achievement score based on the COI data for all clusters and also individual clusters
     ''')
     Report.markdown('''In our analysis, we found 4 clusters.  One of them was essentially a cluster of outliers (extremely large urban school districts).  The other three clusters divided the remaining districts roughly in thirds.   When we examined permutation feature importance for histogram-based gradient boosting tree regression models trained either on all clusters together or on individual clusters, we found correlations between the distributions of important features and the amount of districts reporting above- or below-average scores.  For the **School Poverty** feature, the pattern was especially clear, with higher levels of poverty correlating to more districts reporting low mean scores. 
     ''')
