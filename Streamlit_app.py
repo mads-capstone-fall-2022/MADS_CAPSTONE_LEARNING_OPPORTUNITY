@@ -251,7 +251,7 @@ if check_password():
     #### REPORT SECTION ####
 
     Report.title('Evaluating US School District Achievement Scores Based on Community Resource Levels')
-    Report.markdown('Team Learning Opportunity: Jayachandra Korrapati and Katie Andrews')
+    Report.markdown('Team Learning Opportunity: Jayachandra Korrapati and Kathryn Andrews')
 
 
     Report.header('Introduction', anchor='introduction')
@@ -434,7 +434,7 @@ if check_password():
 
 
     Report.header('Statement of Work', anchor='statement_of_work')
-    Report.markdown('''Katie Andrews: Data processing, prediction methods and feature importance, and report.''')
+    Report.markdown('''Kathryn Andrews: Data processing, prediction methods and feature importance, and report.''')
     Report.markdown('''Jayachandra Korrapati: Data processing, Principal Component Analysis, clustering methods, environment setup and configuration, and dashboard.''')
 
 
