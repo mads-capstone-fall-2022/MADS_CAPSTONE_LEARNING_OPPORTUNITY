@@ -1,12 +1,12 @@
 # Evaluating US School District Achievement Scores Based on Community Resource Levels
 ## MADS Capstone Fall 2022 - Team Learning Opportunity
 
-This project was completed for the Capstone course of the Master of Applied Data Science program at the University of Michigan's School of Information by Katie Andrews and Jayachandra Korrapati. 
+This project was completed for the Capstone course of the Master of Applied Data Science program at the University of Michigan's School of Information by Kathryn Andrews and Jayachandra Korrapati. 
 
 The code in this repository will allow you to reproduce our analysis of 2 datasets:
-- The Child Opportunity Index v2.0 (COI)
-- The Standford Educational Data Archive v4.1 (SEDA)
-
+- The [Child Opportunity Index v2.0](https://data.diversitydatakids.org/dataset/coi20-child-opportunity-index-2-0-database) (COI) from [datadiversitykids.org](https://www.diversitydatakids.org/)
+- The [Standford Educational Data Archive v4.1](https://edopportunity.org/get-the-data/seda-archive-downloads/) (SEDA) from the [Educational Opportunity Project at Stanford Univerity](https://edopportunity.org/)
+a
 We analyzed these datasets to explore US school district comparison by clustering school districts based on the COI factors, then by using the COI data to predict SEDA achievement scores for grade school reading and math.  
 
 ## Streamlit App
