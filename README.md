@@ -5,7 +5,7 @@ This project was completed for the Capstone course of the Master of Applied Data
 
 The code in this repository will allow you to reproduce our analysis of 2 datasets:
 - The [Child Opportunity Index v2.0](https://data.diversitydatakids.org/dataset/coi20-child-opportunity-index-2-0-database) (COI) from [datadiversitykids.org](https://www.diversitydatakids.org/)
-- The [Standford Educational Data Archive v4.1](https://edopportunity.org/get-the-data/seda-archive-downloads/) (SEDA) from the [Educational Opportunity Project at Stanford Univerity](https://edopportunity.org/)
+- The [Stanford Educational Data Archive v4.1](https://edopportunity.org/get-the-data/seda-archive-downloads/) (SEDA) from the [Educational Opportunity Project at Stanford University](https://edopportunity.org/)
 
 We analyzed these datasets to explore US school district comparison by clustering school districts based on the COI factors, then by using the COI data to predict SEDA achievement scores for grade school reading and math.  
 
