@@ -36,10 +36,10 @@ Some of the data we used, including the COI indicators, is already in the data_r
 	3. [Direct File Download Link](https://stacks.stanford.edu/file/druid:db586ns4974/seda_geodist_long_cs_4.1.csv)
 2. School district boundaries - 
 	1. [National Center for Educational Statistics Geographic Files Page](https://nces.ed.gov/programs/edge/Geographic/DistrictBoundaries)
-	2. File - Year 2021 Single Composite File (188 MB)
-	3. [Direct File Download Link](https://nces.ed.gov/programs/edge/data/EDGESCHOOLDISTRICT_TL21_SY2021.zip)
+	2. File - Year 2015 Single Composite File (138 MB)
+	3. [Direct File Download Link](https://nces.ed.gov/programs/edge/data/SCHOOLDISTRICT_SY1314_TL15.zip)
 
-Once downloaded, unzip the school district boundary file and place the `.shp` file and the SEDA `.csv` file in the data_raw directory of the cloned repository.
+Once downloaded, place the entire school district boundary `.zip` file and the SEDA `.csv` file in the data_raw directory of the cloned repository.
 
 ### Running the Notebooks
 As several of the notebooks require outputs from earlier notebooks, they should be run in this order:
