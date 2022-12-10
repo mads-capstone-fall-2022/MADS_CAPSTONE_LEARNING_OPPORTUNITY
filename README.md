@@ -52,6 +52,7 @@ As several of the notebooks require outputs from earlier notebooks, they should 
 5. model_training        - Uses the train/test split COI and SEDA data and the learnings from the clustering notebooks to create a K-Means cluster model of the COI 			       data,trains a variety of predictive models on the COI data to predict the overall mean scores from the SEDA data
 6. display_items 	 - Uses the data outputs of model_training to reproduce the figures and tables used in our Streamlit app
 
-Two caveats about the notebooks:
-1. In model_training the cross-validation code will generate slightly different results every time it is run, due to the influence of randomness in the splits.  Unlike other models, I did not use the random_state = 42 setting, because that made all the splits the same as each other, defeating the purpose of cross-validation.
+Three caveats about the notebooks:
+1. In model_training, the cross-validation code will generate slightly different results every time it is run, due to the influence of randomness in the splits.  Unlike other models, I did not use the random_state = 42 setting, because that made all the splits the same as each other, defeating the purpose of cross-validation.
 2. Two files (model_results.csv and cross_val_results.csv) used in display_items were manually typed to get all the model and cross-validation results in a clean, tabular format for display in Streamlit.  These prepared files have been placed in the data_display folder.
+3. In display_items, the line `pio.renderers.default='iframe'` in the first cell may need to be commented out for plots to be displayed.  This line is required in some environments but not in others.
