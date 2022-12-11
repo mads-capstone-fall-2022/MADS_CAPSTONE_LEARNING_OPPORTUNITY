@@ -14,7 +14,8 @@ st.set_page_config(layout="wide")
 Report, Dashboard = st.tabs(["Report Page", "Dashboard Page"])
 
 pio.templates['TLO'] = go.layout.Template(
-    layout=go.Layout(font=dict(family='Rockwell', size=16), title_font=dict(size=24)
+    layout=go.Layout(font=dict(family='Rockwell', size=16), title_font=dict(size=24), 
+                     colorway=px.colors.qualitative.Plotly
     )
 )
 pio.templates.default = 'plotly+TLO'
@@ -122,11 +123,11 @@ x4 = np.array(seda_df[(seda_df['Cluster Name']=='Cluster 4')&(seda_df['seda_year
 # Group data together
 hist_data = [x1, x2, x3, x4]
 group_labels = ['Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4']
-# Create distplot with custom bin_size
+# Create distplot
 fig_dist = ff.create_distplot(
         hist_data, group_labels)
 
-fig_dist.update_layout(autosize=True, title="Distribution Plot-Selected Cluster Relative to Others",legend={'traceorder':'normal'})
+fig_dist.update_layout(autosize=True, title="Distribution Plot - Selected Cluster Relative to Others",legend={'traceorder':'normal'})
 # Plot
 dist_plot_visual.plotly_chart(fig_dist, use_container_width=True)
 
