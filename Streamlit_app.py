@@ -101,7 +101,7 @@ seda_disp_df['cs_mn_all_abs'] = np.abs(seda_disp_df['cs_mn_all'])
 
 #create the map configuration
 fig_map = px.scatter_mapbox(data_frame=seda_disp_df,lat='latitude', lon='longitude', color='sign',color_discrete_sequence=px.colors.qualitative.G10,
-                        zoom = 2,size='cs_mn_all_abs' ,title='Relative mean 4th grade scores across the USA', text='sedalea_name', color_discrete_map = {'Negative': '#AB63FA', 'Positive':'#FECB52'})
+                        zoom = 2,size='cs_mn_all_abs' ,title='Relative Mean 4th Grade Scores Across the USA', text='sedalea_name', color_discrete_map = {'Negative': '#AB63FA', 'Positive':'#FECB52'})
 #fig_map.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 #fig = px.scatter_mapbox(data_frame=child_oppurtunity_index_data_df, lat='latitude', lon='longitude', color='sign', text='sedaleaname', hover_name='subject', size='cs_mn_all_abs')
 
