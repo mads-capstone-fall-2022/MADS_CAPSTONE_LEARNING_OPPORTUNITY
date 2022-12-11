@@ -46,7 +46,7 @@ coi_df, seda_df, feature_imp_df, cluster_df, model_results_df, cross_val_results
 
 
 #### DASHBOARD SECTION ####
-Dashboard.title('Student Achievment Scores on the Same Scale')
+Dashboard.title('Student Achievement Scores on the Same Scale')
 
 
 # add filters at the top
