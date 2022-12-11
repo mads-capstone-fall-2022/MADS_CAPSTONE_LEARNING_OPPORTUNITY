@@ -14,12 +14,10 @@ st.set_page_config(layout="wide")
 Report, Dashboard = st.tabs(["Report Page", "Dashboard Page"])
 
 pio.templates['TLO'] = go.layout.Template(
-    layout=go.Layout(font=dict(family='Rockwell', size=16), title_font=dict(size=24)
+    layout=go.Layout(font=dict(family='Rockwell', size=16), title_font=dict(size=24), colorway=px.colors.qualitative.Plotly
     )
 )
 pio.templates.default = 'plotly+TLO'
-
-colors = px.colors.qualitative.G10[1:]
 
 
 #### DATA LOADING ####
@@ -125,7 +123,7 @@ hist_data = [x1, x2, x3, x4]
 group_labels = ['Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4']
 # Create distplot
 fig_dist = ff.create_distplot(
-        hist_data, group_labels, colors=colors)
+        hist_data, group_labels)
 
 fig_dist.update_layout(autosize=True, title="Distribution Plot - Selected Cluster Relative to Others",legend={'traceorder':'normal'})
 # Plot
@@ -241,7 +239,6 @@ fig_sp_clusters = px.scatter(cluster_df,
                             x='Component 1', 
                             y='Component 2', 
                             color='Cluster Name', 
-                            color_discrete_sequence=colors,
                             category_orders={'Cluster Name': ['Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster  4']}, 
                             hover_name='NAME_LEA15',
                             log_x=True,
