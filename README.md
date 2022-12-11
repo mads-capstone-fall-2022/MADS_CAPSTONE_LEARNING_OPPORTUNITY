@@ -24,7 +24,7 @@ git clone https://github.com/mads-capstone-fall-2022/MADS_CAPSTONE_LEARNING_OPPO
 ### Installing Requirements
 
 ```
-pip install -r requirements.txt
+pip install -r requirements.txt --user
 ```
 
 ### Downloading Data
