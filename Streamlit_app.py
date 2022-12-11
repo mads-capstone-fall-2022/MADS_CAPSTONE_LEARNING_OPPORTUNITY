@@ -392,6 +392,7 @@ if check_password():
         autosize=False,
         margin_b=0
     )
+    sp_coi_hist_1.for_each_annotation(lambda a: a.update(text=a.text.split('=')[-1]))
 
     sp_coi_hist_2 = px.histogram(coi_hist_2, 
                                 x='Value', 
@@ -402,6 +403,7 @@ if check_password():
                                 nbins=100,
                                 width=1200,
                                 height=500)
+    sp_coi_hist_2.for_each_annotation(lambda a: a.update(text=a.text.split('=')[-1]))
 
     with st.container():
         Report.plotly_chart(sp_coi_hist_1, use_container_width=True, sharing='streamlit')
