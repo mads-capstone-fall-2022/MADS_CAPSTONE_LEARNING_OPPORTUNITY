@@ -170,8 +170,6 @@ fig_bp_feat_imp = px.box(feature_imp_disp_df,
                         x='Variable', 
                         y='Importance', 
                         color='Cluster Name', 
-                        # height=800, 
-                        # width=1200, 
                         title='Model Feature Importance')
 fig_bp_feat_imp.update_layout( 
     autosize=True,
@@ -432,7 +430,7 @@ fig_cross_val.update_layout(
 Report.plotly_chart(fig_cross_val, sharing='streamlit')
 
 
-Report.markdown('''The below plot shows the residuals for the final all-cluster model.  The residuals are  shaped as would be expected from a good model.  They cluster in a roughly circular shape around zero.  They also lack signs of bias, heteroscedasticity, or non-linearity, any of which would indicate a systemic issue with the model.
+Report.markdown('''The below plot shows the residuals for the final all-cluster model.  The residuals are shaped as would be expected from a good model.  They cluster around zero and lack signs of bias, heteroscedasticity, or non-linearity, any of which would indicate a systemic issue with the model.
 ''')
 
 seda_df['residuals'] = seda_df['cs_mn_all'] - seda_df['predictions']
