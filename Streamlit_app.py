@@ -123,7 +123,7 @@ hist_data = [x1, x2, x3, x4]
 group_labels = ['Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4']
 # Create distplot
 fig_dist = ff.create_distplot(
-        hist_data, group_labels, colors=px.colors.qualitative.Plotly)
+        hist_data, group_labels, colors=px.colors.qualitative.Plotly[1:])
 
 fig_dist.update_layout(autosize=True, title="Distribution Plot - Selected Cluster Relative to Others",legend={'traceorder':'normal'})
 # Plot
